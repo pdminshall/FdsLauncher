@@ -49,13 +49,13 @@ namespace FdsLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp")]
-        public string FdsFolder {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\fds.exe")]
+        public string FdsExe {
             get {
-                return ((string)(this["FdsFolder"]));
+                return ((string)(this["FdsExe"]));
             }
             set {
-                this["FdsFolder"] = value;
+                this["FdsExe"] = value;
             }
         }
         
@@ -73,13 +73,13 @@ namespace FdsLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp")]
-        public string SmvFolder {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\temp\\smokeview.exe")]
+        public string SmvExe {
             get {
-                return ((string)(this["SmvFolder"]));
+                return ((string)(this["SmvExe"]));
             }
             set {
-                this["SmvFolder"] = value;
+                this["SmvExe"] = value;
             }
         }
     }

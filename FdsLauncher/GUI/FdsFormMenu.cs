@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using FdsLauncher.Properties;
 
 namespace FdsLauncher
@@ -14,8 +15,8 @@ namespace FdsLauncher
         // Menu refresh method
         private void MenuRefresh()
         {
-            MenuSettingsFdsFolderRefresh();
-            MenuSettingsSmvFolderRefresh();
+            MenuSettingsFdsExeRefresh();
+            MenuSettingsSmvExeRefresh();
 
             // TODO: Use flags to determine if menus are active
             // TODO: Need to disable menus if FDS is running
@@ -28,61 +29,67 @@ namespace FdsLauncher
         }
 
         // Handle change of FDS executable folder
-        private void MenuSettingsFdsFolder_Click(object sender, EventArgs e)
+        private void MenuSettingsFdsExe_Click(object sender, EventArgs e)
         {
-            string oldFdsFolder = Settings.Default.FdsFolder;
+            string oldFdsExe = Settings.Default.FdsExe;
 
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog
+            OpenFileDialog fileDialog = new OpenFileDialog
             {
-                Description = "Select FDS executable folder\n" +
-                              "(" + oldFdsFolder + ")",
-                SelectedPath = oldFdsFolder,
-                ShowNewFolderButton = false
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = ".exe",
+                FileName = oldFdsExe,
+                Title = "Select FDS executable (fds.exe)",
+                InitialDirectory = Path.GetDirectoryName(oldFdsExe)
             };
-            DialogResult result = folderDialog.ShowDialog();
+
+            DialogResult result = fileDialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                Settings.Default.FdsFolder = folderDialog.SelectedPath;
+                Settings.Default.FdsExe = fileDialog.FileName;
                 Settings.Default.Save();
             }
 
-            MenuSettingsFdsFolderRefresh();
+            MenuSettingsFdsExeRefresh();
         }
 
         // Refresh FDS menu item
-        private void MenuSettingsFdsFolderRefresh()
+        private void MenuSettingsFdsExeRefresh()
         {
-            MenuSettingsFdsFolder.Text = "FDS executable folder = " + Settings.Default.FdsFolder;
+            MenuSettingsFdsExe.Text = "FDS executable file = " + Settings.Default.FdsExe;
         }
 
         // Handle change of SMV executable folder
-        private void MenuSettingsSmvFolder_Click(object sender, EventArgs e)
+        private void MenuSettingsSmvExe_Click(object sender, EventArgs e)
         {
-            string oldSmvFolder = Settings.Default.SmvFolder;
+            string oldSmvExe = Settings.Default.SmvExe;
 
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog
+            OpenFileDialog fileDialog = new OpenFileDialog
             {
-                Description = "Select Smokeview executable folder\n" +
-                              "(" + oldSmvFolder + ")",
-                SelectedPath = oldSmvFolder,
-                ShowNewFolderButton = false
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = ".exe",
+                FileName = oldSmvExe,
+                Title = "Select Smokeview executable (smokeview.exe)",
+                InitialDirectory = Path.GetDirectoryName(oldSmvExe)
             };
-            DialogResult result = folderDialog.ShowDialog();
+
+            DialogResult result = fileDialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                Settings.Default.SmvFolder = folderDialog.SelectedPath;
+                Settings.Default.SmvExe = fileDialog.FileName;
                 Settings.Default.Save();
             }
 
-            MenuSettingsSmvFolderRefresh();
+            MenuSettingsSmvExeRefresh();
         }
 
         // Refresh SMV menu item
-        private void MenuSettingsSmvFolderRefresh()
+        private void MenuSettingsSmvExeRefresh()
         {
-            MenuSettingsSmvFolder.Text = "Smokeview executable folder = " + Settings.Default.SmvFolder;
+            MenuSettingsSmvExe.Text = "Smokeview executable file = " + Settings.Default.SmvExe;
         }
     }
 }
