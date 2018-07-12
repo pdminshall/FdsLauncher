@@ -17,6 +17,7 @@ namespace FdsLauncher
         {
             MenuSettingsFdsExeRefresh();
             MenuSettingsSmvExeRefresh();
+            MenuSettingsDataFolderRefresh();
 
             // TODO: Use flags to determine if menus are active
             // TODO: Need to disable menus if FDS is running
@@ -90,6 +91,34 @@ namespace FdsLauncher
         private void MenuSettingsSmvExeRefresh()
         {
             MenuSettingsSmvExe.Text = "Smokeview executable file = " + Settings.Default.SmvExe;
+        }
+
+        // Handle change of data folder
+        private void MenuSettingsDataFolder_Click(object sender, EventArgs e)
+        {
+            string oldDataFolder = Settings.Default.DataFolder;
+
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog
+            {
+                SelectedPath = oldDataFolder,
+                ShowNewFolderButton = false,
+                Description = "Select data folder (" + oldDataFolder + ")"
+            };
+            DialogResult result = folderDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                Settings.Default.DataFolder = folderDialog.SelectedPath;
+                Settings.Default.Save();
+            }
+
+            MenuSettingsDataFolderRefresh();
+        }
+
+        // Refresh folder menu item
+        private void MenuSettingsDataFolderRefresh()
+        {
+            MenuSettingsDataFolder.Text = "Data folder = " + Settings.Default.DataFolder;
         }
     }
 }
