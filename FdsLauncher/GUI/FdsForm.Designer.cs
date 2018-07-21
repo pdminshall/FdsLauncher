@@ -39,11 +39,11 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuSettingsDataFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnTestFds = new System.Windows.Forms.Button();
             this.ListBoxConsole = new System.Windows.Forms.ListBox();
             this.BtnPickFile = new System.Windows.Forms.Button();
             this.LblFdsDataFile = new System.Windows.Forms.Label();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.BtnTestFds = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -73,18 +73,18 @@
             // MenuAbout
             // 
             this.MenuAbout.Name = "MenuAbout";
-            this.MenuAbout.Size = new System.Drawing.Size(179, 38);
+            this.MenuAbout.Size = new System.Drawing.Size(324, 38);
             this.MenuAbout.Text = "About";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(176, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(321, 6);
             // 
             // MenuExit
             // 
             this.MenuExit.Name = "MenuExit";
-            this.MenuExit.Size = new System.Drawing.Size(179, 38);
+            this.MenuExit.Size = new System.Drawing.Size(324, 38);
             this.MenuExit.Text = "Exit";
             this.MenuExit.Click += new System.EventHandler(this.MenuExit_Click);
             // 
@@ -139,7 +139,7 @@
             this.tableLayoutPanel1.Controls.Add(this.LblFdsDataFile, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 40);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
@@ -148,6 +148,20 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1596, 327);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // BtnTestFds
+            // 
+            this.BtnTestFds.AutoSize = true;
+            this.BtnTestFds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnTestFds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTestFds.Location = new System.Drawing.Point(10, 90);
+            this.BtnTestFds.Margin = new System.Windows.Forms.Padding(10);
+            this.BtnTestFds.Name = "BtnTestFds";
+            this.BtnTestFds.Size = new System.Drawing.Size(299, 60);
+            this.BtnTestFds.TabIndex = 3;
+            this.BtnTestFds.Text = "Test FDS";
+            this.BtnTestFds.UseVisualStyleBackColor = true;
+            this.BtnTestFds.Click += new System.EventHandler(this.BtnTestFds_Click);
             // 
             // ListBoxConsole
             // 
@@ -175,7 +189,7 @@
             this.BtnPickFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnPickFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnPickFile.Location = new System.Drawing.Point(10, 10);
-            this.BtnPickFile.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.BtnPickFile.Margin = new System.Windows.Forms.Padding(10);
             this.BtnPickFile.Name = "BtnPickFile";
             this.BtnPickFile.Size = new System.Drawing.Size(299, 60);
             this.BtnPickFile.TabIndex = 1;
@@ -200,20 +214,6 @@
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
             // 
-            // BtnTestFds
-            // 
-            this.BtnTestFds.AutoSize = true;
-            this.BtnTestFds.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnTestFds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnTestFds.Location = new System.Drawing.Point(10, 90);
-            this.BtnTestFds.Margin = new System.Windows.Forms.Padding(10);
-            this.BtnTestFds.Name = "BtnTestFds";
-            this.BtnTestFds.Size = new System.Drawing.Size(299, 60);
-            this.BtnTestFds.TabIndex = 3;
-            this.BtnTestFds.Text = "Test FDS";
-            this.BtnTestFds.UseVisualStyleBackColor = true;
-            this.BtnTestFds.Click += new System.EventHandler(this.BtnTestFds_Click);
-            // 
             // FdsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -223,7 +223,7 @@
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FdsForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "FDS Launcher";

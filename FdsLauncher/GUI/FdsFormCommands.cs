@@ -20,6 +20,9 @@ namespace FdsLauncher
         {
 
             // TODO: Disable all buttons
+            DisableAllMenus();
+            DisableAllButtons();
+            Application.DoEvents();
 
             // Write header to console
             ClearConsole();
@@ -65,9 +68,21 @@ namespace FdsLauncher
             RefreshConsole();
 
             // TODO: Refresh all buttons
+            EnableAllMenus();
+            EnableAllButtons();
 
         }
 
+        private void DisableAllButtons()
+        {
+            BtnPickFile.Enabled = false;
+            BtnTestFds.Enabled = false;
+        }
+        private void EnableAllButtons()
+        {
+            BtnPickFile.Enabled = true;
+            BtnTestFds.Enabled = true;
+        }
     }
 
 }

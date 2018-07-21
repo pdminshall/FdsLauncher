@@ -120,5 +120,21 @@ namespace FdsLauncher
         {
             MenuSettingsDataFolder.Text = "Data folder = " + Settings.Default.DataFolder;
         }
+
+        // Disable all menu options
+        private void DisableAllMenus()
+        {
+            MenuSettingsFdsExe.Enabled = false;
+            MenuSettingsSmvExe.Enabled = false;
+            MenuSettingsDataFolder.Enabled = false;
+        }
+
+        // Enable all menu options
+        private void EnableAllMenus()
+        {
+            MenuSettingsFdsExe.Enabled = true;
+            MenuSettingsSmvExe.Enabled = true;
+            MenuSettingsDataFolder.Enabled = true;
+        }
     }
 }
