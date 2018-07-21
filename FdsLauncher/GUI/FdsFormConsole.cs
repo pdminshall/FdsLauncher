@@ -22,6 +22,8 @@ namespace FdsLauncher
         // Add multiple lines to console
         private void AddConsoleLines(string[] lines)
         {
+            if (lines == null) { return; }
+
             // Add single lines
             foreach (string line in lines)
             {
@@ -40,7 +42,13 @@ namespace FdsLauncher
         // Add single line to console
         private void AddConsoleLines(string line)
         {
-            AddConsoleLines(new string[] { line });
+
+            if (line == null) { return; }
+
+            // Check for embedded carriage returns
+            string[] lines = line.Split('\n');
+
+            AddConsoleLines(lines);
         }
 
         // Refresh console
