@@ -12,16 +12,10 @@ namespace FdsLauncher
 {
     public partial class FdsForm : Form
     {
-        #region Form Startup/Shutdown
         public FdsForm()
         {
             InitializeComponent();
             ClearConsole();
-
-            for (int c=1; c<=1500; c++)
-            {
-                AddConsoleLines("This is line number: " + c);
-            }
         }
 
         // When form loaded
@@ -56,7 +50,6 @@ namespace FdsLauncher
             Properties.Settings.Default.WindowSize = this.Size;
             Properties.Settings.Default.Save();
         }
-        #endregion
 
         private void FdsForm_Resize(object sender, EventArgs e)
         {

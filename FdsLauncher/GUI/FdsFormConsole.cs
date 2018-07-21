@@ -27,7 +27,7 @@ namespace FdsLauncher
             // Add single lines
             foreach (string line in lines)
             {
-                ListBoxConsole.Items.Add(line);
+                ListBoxConsole.Items.Add(line ?? "");
             }
 
             // Clear lines beyond maximum

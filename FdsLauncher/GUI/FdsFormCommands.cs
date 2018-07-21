@@ -15,14 +15,17 @@ namespace FdsLauncher
     public partial class FdsForm : Form
     {
 
-        // Test routine for FDS
+        // Test FDS executable
         private void BtnTestFds_Click(object sender, EventArgs e)
         {
 
-            // TODO: Disable all buttons
+            // Disable all buttons
             DisableAllMenus();
             DisableAllButtons();
             Application.DoEvents();
+
+            // Console output object
+            List<string> strOutput = new List<string>();
 
             // Write header to console
             ClearConsole();
@@ -32,11 +35,16 @@ namespace FdsLauncher
 
             // Create process object
             Process fcmProcess = new Process();
-            fcmProcess.StartInfo.CreateNoWindow = false;
+            fcmProcess.StartInfo.CreateNoWindow = true;
             fcmProcess.StartInfo.LoadUserProfile = true;
-            fcmProcess.StartInfo.UseShellExecute = true;
+            fcmProcess.StartInfo.UseShellExecute = false;
             fcmProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(Settings.Default.FdsExe);
             fcmProcess.StartInfo.FileName = Settings.Default.FdsExe;
+            fcmProcess.StartInfo.RedirectStandardOutput = true;
+            fcmProcess.StartInfo.RedirectStandardError = true;
+            fcmProcess.StartInfo.RedirectStandardInput = true;
+            fcmProcess.OutputDataReceived += (send, args) => { strOutput.Add(args.Data); };
+            fcmProcess.ErrorDataReceived += (send, args) => { strOutput.Add(args.Data); };
             fcmProcess.StartInfo.Arguments = "";
 
             // Try running process
@@ -44,9 +52,13 @@ namespace FdsLauncher
             {
                 // Start process
                 fcmProcess.Start();
-
-                // Wait for exit
+                fcmProcess.BeginOutputReadLine();
+                fcmProcess.BeginErrorReadLine();
+                fcmProcess.StandardInput.WriteLine("");
                 fcmProcess.WaitForExit();
+                fcmProcess.CancelErrorRead();
+                fcmProcess.CancelOutputRead();
+                AddConsoleLines(strOutput.ToArray<string>());
             }
             catch (Exception ex)
             {
@@ -64,10 +76,12 @@ namespace FdsLauncher
             }
 
             // Refresh console
-            AddConsoleLines("OK");
+            AddConsoleLines("--------");
+            AddConsoleLines("Finished");
+            AddConsoleLines("--------");
             RefreshConsole();
 
-            // TODO: Refresh all buttons
+            // Refresh all buttons
             EnableAllMenus();
             EnableAllButtons();
 
