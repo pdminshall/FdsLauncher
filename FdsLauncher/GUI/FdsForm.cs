@@ -16,6 +16,12 @@ namespace FdsLauncher
         public FdsForm()
         {
             InitializeComponent();
+            ClearConsole();
+
+            for (int c=1; c<=1500; c++)
+            {
+                AddConsoleLines("This is line number: " + c);
+            }
         }
 
         // When form loaded
@@ -52,5 +58,14 @@ namespace FdsLauncher
         }
         #endregion
 
+        private void FdsForm_Resize(object sender, EventArgs e)
+        {
+            RefreshConsole();
+        }
+
+        private void FdsForm_Shown(object sender, EventArgs e)
+        {
+            RefreshConsole();
+        }
     }
 }
