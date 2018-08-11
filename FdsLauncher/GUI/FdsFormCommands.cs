@@ -29,9 +29,9 @@ namespace FdsLauncher
 
             // Write header to console
             ClearConsole();
-            AddConsoleLines("----------------------");
-            AddConsoleLines("Testing FCM executable");
-            AddConsoleLines("----------------------");
+            AddConsoleLine("----------------------");
+            AddConsoleLine("Testing FCM executable");
+            AddConsoleLine("----------------------");
 
             // Create process object
             Process fcmProcess = new Process();
@@ -63,8 +63,8 @@ namespace FdsLauncher
             catch (Exception ex)
             {
                 // Some problem with executable
-                AddConsoleLines("ERROR: Some problem running FDS");
-                AddConsoleLines(ex.Message);
+                AddConsoleLine("ERROR: Some problem running FDS");
+                AddConsoleLine(ex.Message);
 
             }
             finally
@@ -76,9 +76,9 @@ namespace FdsLauncher
             }
 
             // Refresh console
-            AddConsoleLines("--------");
-            AddConsoleLines("Finished");
-            AddConsoleLines("--------");
+            AddConsoleLine("--------");
+            AddConsoleLine("Finished");
+            AddConsoleLine("--------");
             RefreshConsole();
 
             // Refresh all buttons
@@ -92,29 +92,46 @@ namespace FdsLauncher
             BtnPickFile.Enabled = false;
             BtnTestFds.Enabled = false;
             BtnStartFds.Enabled = false;
+            BtnStopFds.Enabled = false;
         }
 
-        private void RefreshAllButtons()
+        public void RefreshAllButtons()
         {
-            if (IsBgRunning())
+            if (FdsBgWorker.IsBgRunning())
             {
                 BtnPickFile.Enabled = false;
                 BtnTestFds.Enabled = false;
                 BtnStartFds.Enabled = false;
+                BtnStopFds.Enabled = true;
             }
             else
             {
                 BtnPickFile.Enabled = true;
                 BtnTestFds.Enabled = true;
                 BtnStartFds.Enabled = true;
+                BtnStopFds.Enabled = false;
             }
         }
 
         private void BtnStartFds_Click(object sender, EventArgs e)
         {
 
-            if (IsBgRunning()) { return; }
+            // Disable all commands and menus and refresh GUI
+            DisableAllButtons();
+            DisableAllMenus();
+            Application.DoEvents();
 
+            // Make sure that process is not already running
+            if (FdsBgWorker.IsBgRunning())
+            {
+                RefreshAllButtons();
+                RefreshAllMenus();
+                return;
+            }
+
+            // TODO: Check if exe and data is valid
+
+            // Build arguments for background worker
             string fdsExeFile = Settings.Default.FdsExe;
             string fdsDataFile = LblFdsDataFile.Text;
             List<string> fdsArgs = new List<string>
@@ -123,11 +140,19 @@ namespace FdsLauncher
                 fdsDataFile
             };
 
-            DisableAllButtons();
-            DisableAllMenus();
-            StartFds(fdsArgs);
+            // Run wrapper function to start background worker
+            FdsBgWorker.StartFds(this, fdsArgs);
+
+            // Refresh all buttons and menus
             RefreshAllButtons();
             RefreshAllMenus();
+        }
+
+        private void BtnStopFds_Click(object sender, EventArgs e)
+        {
+            // Write intention to stop process and send interrupt to background worker
+            AddConsoleLine("Interrupt pending..");
+            FdsBgWorker.CancelBgWorker();
         }
     }
 

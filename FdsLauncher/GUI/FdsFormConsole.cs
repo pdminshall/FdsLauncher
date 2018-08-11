@@ -14,13 +14,13 @@ namespace FdsLauncher
     {
 
         // Clear screen
-        private void ClearConsole()
+        public void ClearConsole()
         {
             ListBoxConsole.Items.Clear();
         }
 
         // Add multiple lines to console
-        private void AddConsoleLines(string[] lines)
+        public void AddConsoleLines(string[] lines)
         {
             if (lines == null) { return; }
 
@@ -40,7 +40,7 @@ namespace FdsLauncher
         }
 
         // Add single line to console
-        private void AddConsoleLines(string line)
+        public void AddConsoleLine(string line)
         {
 
             if (line == null) { return; }

@@ -27,6 +27,10 @@ namespace FdsLauncher
 
             // Refresh menus
             MenuRefresh();
+            RefreshAllMenus();
+
+            // Refresh buttons
+            RefreshAllButtons();
         }
 
         // When form closing

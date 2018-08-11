@@ -44,7 +44,7 @@
             this.ListBoxConsole = new System.Windows.Forms.ListBox();
             this.BtnPickFile = new System.Windows.Forms.Button();
             this.LblFdsDataFile = new System.Windows.Forms.Label();
-            this.bgWorker = new System.ComponentModel.BackgroundWorker();
+            this.BtnStopFds = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -134,6 +134,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.BtnStopFds, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.BtnStartFds, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.BtnTestFds, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ListBoxConsole, 0, 3);
@@ -226,13 +227,20 @@
             this.LblFdsDataFile.TabIndex = 2;
             this.LblFdsDataFile.Text = "C:\\Users\\Documents\\FDS\\SubFolder\\123456.fds";
             // 
-            // bgWorker
             // 
-            this.bgWorker.WorkerReportsProgress = true;
-            this.bgWorker.WorkerSupportsCancellation = true;
-            this.bgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.StartBgWorker);
-            this.bgWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.HandleBgProgress);
-            this.bgWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.HandleBgExit);
+            // BtnStopFds
+            // 
+            this.BtnStopFds.AutoSize = true;
+            this.BtnStopFds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnStopFds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnStopFds.Location = new System.Drawing.Point(329, 90);
+            this.BtnStopFds.Margin = new System.Windows.Forms.Padding(10);
+            this.BtnStopFds.Name = "BtnStopFds";
+            this.BtnStopFds.Size = new System.Drawing.Size(299, 60);
+            this.BtnStopFds.TabIndex = 5;
+            this.BtnStopFds.Text = "Stop FDS";
+            this.BtnStopFds.UseVisualStyleBackColor = true;
+            this.BtnStopFds.Click += new System.EventHandler(this.BtnStopFds_Click);
             // 
             // FdsForm
             // 
@@ -277,8 +285,8 @@
         private System.Windows.Forms.ToolStripMenuItem MenuSettingsSmvExe;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.Button BtnTestFds;
-        private System.ComponentModel.BackgroundWorker bgWorker;
         private System.Windows.Forms.Button BtnStartFds;
+        private System.Windows.Forms.Button BtnStopFds;
     }
 }
 

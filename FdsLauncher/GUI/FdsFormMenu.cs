@@ -12,15 +12,11 @@ namespace FdsLauncher
     // Methods for processing menu options
     public partial class FdsForm : Form
     {
-        // Menu refresh method
         private void MenuRefresh()
         {
             MenuSettingsFdsExeRefresh();
             MenuSettingsSmvExeRefresh();
             MenuSettingsDataFolderRefresh();
-
-            // TODO: Use flags to determine if menus are active
-            // TODO: Need to disable menus if FDS is running
         }
 
         // Exit menu option
@@ -129,17 +125,9 @@ namespace FdsLauncher
             MenuSettingsDataFolder.Enabled = false;
         }
 
-        // Enable all menu options
-        private void EnableAllMenus()
+        public void RefreshAllMenus()
         {
-            MenuSettingsFdsExe.Enabled = true;
-            MenuSettingsSmvExe.Enabled = true;
-            MenuSettingsDataFolder.Enabled = true;
-        }
-
-        private void RefreshAllMenus()
-        {
-            if (IsBgRunning())
+            if (FdsBgWorker.IsBgRunning())
             {
                 MenuSettingsFdsExe.Enabled = false;
                 MenuSettingsSmvExe.Enabled = false;
