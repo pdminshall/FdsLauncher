@@ -34,6 +34,7 @@ namespace FdsLauncher
             Thread.Sleep(5000);
             if (bgWorker.CancellationPending)
             {
+                // TODO: To to this properly, write .stop file and wait for exit
                 e.Cancel = true;
                 return;
             }
@@ -87,6 +88,9 @@ namespace FdsLauncher
         // Wrapper method to start FDS background worker
         public static void StartFds(FdsForm fdsForm, List<string> fdsArgs)
         {
+
+            // TODO: Need to verify that RESTART is set in FDS file. This may be a restart.
+
             if (IsBgRunning()) { return; }
 
             // Get reference to form
