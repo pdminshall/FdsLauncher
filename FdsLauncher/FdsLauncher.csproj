@@ -81,6 +81,9 @@
     <Compile Include="GUI\FdsForm.Designer.cs">
       <DependentUpon>FdsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\FdsFormBackground.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\FdsFormCommands.cs">
       <SubType>Form</SubType>
     </Compile>

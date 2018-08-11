@@ -82,8 +82,8 @@ namespace FdsLauncher
             RefreshConsole();
 
             // Refresh all buttons
-            EnableAllMenus();
-            EnableAllButtons();
+            RefreshAllButtons();
+            RefreshAllMenus();
 
         }
 
@@ -91,11 +91,43 @@ namespace FdsLauncher
         {
             BtnPickFile.Enabled = false;
             BtnTestFds.Enabled = false;
+            BtnStartFds.Enabled = false;
         }
-        private void EnableAllButtons()
+
+        private void RefreshAllButtons()
         {
-            BtnPickFile.Enabled = true;
-            BtnTestFds.Enabled = true;
+            if (IsBgRunning())
+            {
+                BtnPickFile.Enabled = false;
+                BtnTestFds.Enabled = false;
+                BtnStartFds.Enabled = false;
+            }
+            else
+            {
+                BtnPickFile.Enabled = true;
+                BtnTestFds.Enabled = true;
+                BtnStartFds.Enabled = true;
+            }
+        }
+
+        private void BtnStartFds_Click(object sender, EventArgs e)
+        {
+
+            if (IsBgRunning()) { return; }
+
+            string fdsExeFile = Settings.Default.FdsExe;
+            string fdsDataFile = LblFdsDataFile.Text;
+            List<string> fdsArgs = new List<string>
+            {
+                fdsExeFile,
+                fdsDataFile
+            };
+
+            DisableAllButtons();
+            DisableAllMenus();
+            StartFds(fdsArgs);
+            RefreshAllButtons();
+            RefreshAllMenus();
         }
     }
 

@@ -136,5 +136,22 @@ namespace FdsLauncher
             MenuSettingsSmvExe.Enabled = true;
             MenuSettingsDataFolder.Enabled = true;
         }
+
+        private void RefreshAllMenus()
+        {
+            if (IsBgRunning())
+            {
+                MenuSettingsFdsExe.Enabled = false;
+                MenuSettingsSmvExe.Enabled = false;
+                MenuSettingsDataFolder.Enabled = false;
+            }
+            else
+            {
+                MenuSettingsFdsExe.Enabled = true;
+                MenuSettingsSmvExe.Enabled = true;
+                MenuSettingsDataFolder.Enabled = true;
+            }
+
+        }
     }
 }

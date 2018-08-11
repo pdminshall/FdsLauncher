@@ -39,11 +39,12 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuSettingsDataFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnStartFds = new System.Windows.Forms.Button();
             this.BtnTestFds = new System.Windows.Forms.Button();
             this.ListBoxConsole = new System.Windows.Forms.ListBox();
             this.BtnPickFile = new System.Windows.Forms.Button();
             this.LblFdsDataFile = new System.Windows.Forms.Label();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.bgWorker = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -73,18 +74,18 @@
             // MenuAbout
             // 
             this.MenuAbout.Name = "MenuAbout";
-            this.MenuAbout.Size = new System.Drawing.Size(324, 38);
+            this.MenuAbout.Size = new System.Drawing.Size(179, 38);
             this.MenuAbout.Text = "About";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(321, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(176, 6);
             // 
             // MenuExit
             // 
             this.MenuExit.Name = "MenuExit";
-            this.MenuExit.Size = new System.Drawing.Size(324, 38);
+            this.MenuExit.Size = new System.Drawing.Size(179, 38);
             this.MenuExit.Text = "Exit";
             this.MenuExit.Click += new System.EventHandler(this.MenuExit_Click);
             // 
@@ -102,26 +103,26 @@
             // MenuSettingsFdsExe
             // 
             this.MenuSettingsFdsExe.Name = "MenuSettingsFdsExe";
-            this.MenuSettingsFdsExe.Size = new System.Drawing.Size(324, 38);
+            this.MenuSettingsFdsExe.Size = new System.Drawing.Size(281, 38);
             this.MenuSettingsFdsExe.Text = "FDS Exe";
             this.MenuSettingsFdsExe.Click += new System.EventHandler(this.MenuSettingsFdsExe_Click);
             // 
             // MenuSettingsSmvExe
             // 
             this.MenuSettingsSmvExe.Name = "MenuSettingsSmvExe";
-            this.MenuSettingsSmvExe.Size = new System.Drawing.Size(324, 38);
+            this.MenuSettingsSmvExe.Size = new System.Drawing.Size(281, 38);
             this.MenuSettingsSmvExe.Text = "SmokeView Exe";
             this.MenuSettingsSmvExe.Click += new System.EventHandler(this.MenuSettingsSmvExe_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(321, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(278, 6);
             // 
             // MenuSettingsDataFolder
             // 
             this.MenuSettingsDataFolder.Name = "MenuSettingsDataFolder";
-            this.MenuSettingsDataFolder.Size = new System.Drawing.Size(324, 38);
+            this.MenuSettingsDataFolder.Size = new System.Drawing.Size(281, 38);
             this.MenuSettingsDataFolder.Text = "Data Folder";
             this.MenuSettingsDataFolder.Click += new System.EventHandler(this.MenuSettingsDataFolder_Click);
             // 
@@ -133,6 +134,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.BtnStartFds, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.BtnTestFds, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ListBoxConsole, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.BtnPickFile, 0, 0);
@@ -146,8 +148,23 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1596, 327);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // BtnStartFds
+            // 
+            this.BtnStartFds.AutoSize = true;
+            this.BtnStartFds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnStartFds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnStartFds.Location = new System.Drawing.Point(329, 10);
+            this.BtnStartFds.Margin = new System.Windows.Forms.Padding(10);
+            this.BtnStartFds.Name = "BtnStartFds";
+            this.BtnStartFds.Size = new System.Drawing.Size(299, 60);
+            this.BtnStartFds.TabIndex = 4;
+            this.BtnStartFds.Text = "Start FDS";
+            this.BtnStartFds.UseVisualStyleBackColor = true;
+            this.BtnStartFds.Click += new System.EventHandler(this.BtnStartFds_Click);
             // 
             // BtnTestFds
             // 
@@ -209,10 +226,13 @@
             this.LblFdsDataFile.TabIndex = 2;
             this.LblFdsDataFile.Text = "C:\\Users\\Documents\\FDS\\SubFolder\\123456.fds";
             // 
-            // backgroundWorker
+            // bgWorker
             // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.bgWorker.WorkerReportsProgress = true;
+            this.bgWorker.WorkerSupportsCancellation = true;
+            this.bgWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.StartBgWorker);
+            this.bgWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.HandleBgProgress);
+            this.bgWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.HandleBgExit);
             // 
             // FdsForm
             // 
@@ -253,11 +273,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ListBox ListBoxConsole;
         private System.Windows.Forms.Button BtnPickFile;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.Label LblFdsDataFile;
         private System.Windows.Forms.ToolStripMenuItem MenuSettingsSmvExe;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.Button BtnTestFds;
+        private System.ComponentModel.BackgroundWorker bgWorker;
+        private System.Windows.Forms.Button BtnStartFds;
     }
 }
 
