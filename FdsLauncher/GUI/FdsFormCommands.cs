@@ -108,7 +108,14 @@ namespace FdsLauncher
             {
                 BtnPickFile.Enabled = true;
                 BtnTestFds.Enabled = true;
-                BtnStartFds.Enabled = true;
+                if (File.Exists(LblFdsDataFile.Text))
+                {
+                    BtnStartFds.Enabled = true;
+                }
+                else
+                {
+                    BtnStartFds.Enabled = false;
+                }
                 BtnStopFds.Enabled = false;
             }
         }
@@ -129,7 +136,8 @@ namespace FdsLauncher
                 return;
             }
 
-            // TODO: Check if exe and data is valid
+            // Check if exe and data is valid
+            if (!File.Exists(LblFdsDataFile.Text) || !File.Exists(Settings.Default.FdsExe)) { return; }
 
             // Build arguments for background worker
             string fdsExeFile = Settings.Default.FdsExe;
@@ -153,6 +161,31 @@ namespace FdsLauncher
             // Write intention to stop process and send interrupt to background worker
             AddConsoleLine("Interrupt pending..");
             FdsBgWorker.CancelBgWorker();
+        }
+
+        // Button to select FDS data file
+        private void BtnPickFile_Click(object sender, EventArgs e)
+        {
+            // Make sure nothing is running
+            if (FdsBgWorker.IsBgRunning()) { return; }
+
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = ".fds",
+                FileName = LblFdsDataFile.Text,
+                Title = "Select FDS data file (*.fds)",
+                InitialDirectory = Settings.Default.DataFolder
+            };
+
+            DialogResult result = fileDialog.ShowDialog();
+
+            if (result == DialogResult.OK && Path.GetExtension(fileDialog.FileName).ToLower() == ".fds")
+            {
+                LblFdsDataFile.Text = fileDialog.FileName;
+            }
+            RefreshAllButtons();
         }
     }
 

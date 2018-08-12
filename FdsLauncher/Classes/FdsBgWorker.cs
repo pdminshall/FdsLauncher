@@ -97,17 +97,14 @@ namespace FdsLauncher
             myFdsForm = fdsForm;
 
             // Initialise background worker, if not already there
-            if (bgWorker == null)
+            bgWorker = new BackgroundWorker
             {
-                bgWorker = new BackgroundWorker
-                {
-                    WorkerReportsProgress = true,
-                    WorkerSupportsCancellation = true
-                };
-                bgWorker.DoWork += new DoWorkEventHandler(StartBgWorker);
-                bgWorker.ProgressChanged += new ProgressChangedEventHandler(HandleBgProgress);
-                bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(HandleBgExit);
-            }
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            bgWorker.DoWork += new DoWorkEventHandler(StartBgWorker);
+            bgWorker.ProgressChanged += new ProgressChangedEventHandler(HandleBgProgress);
+            bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(HandleBgExit);
 
             // Start background worker
             myFdsForm.ClearConsole();
@@ -136,7 +133,7 @@ namespace FdsLauncher
             {
                 myFdsForm.AddConsoleLine("Processed cancelled");
             }
-            else if(e.Error != null)
+            else if (e.Error != null)
             {
                 myFdsForm.AddConsoleLine("Error occurred:");
                 myFdsForm.AddConsoleLine(e.Error.Message);

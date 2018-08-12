@@ -39,12 +39,12 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuSettingsDataFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.BtnStopFds = new System.Windows.Forms.Button();
             this.BtnStartFds = new System.Windows.Forms.Button();
             this.BtnTestFds = new System.Windows.Forms.Button();
             this.ListBoxConsole = new System.Windows.Forms.ListBox();
             this.BtnPickFile = new System.Windows.Forms.Button();
             this.LblFdsDataFile = new System.Windows.Forms.Label();
-            this.BtnStopFds = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -153,6 +153,20 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1596, 327);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // BtnStopFds
+            // 
+            this.BtnStopFds.AutoSize = true;
+            this.BtnStopFds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnStopFds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnStopFds.Location = new System.Drawing.Point(329, 90);
+            this.BtnStopFds.Margin = new System.Windows.Forms.Padding(10);
+            this.BtnStopFds.Name = "BtnStopFds";
+            this.BtnStopFds.Size = new System.Drawing.Size(299, 60);
+            this.BtnStopFds.TabIndex = 5;
+            this.BtnStopFds.Text = "Stop FDS";
+            this.BtnStopFds.UseVisualStyleBackColor = true;
+            this.BtnStopFds.Click += new System.EventHandler(this.BtnStopFds_Click);
+            // 
             // BtnStartFds
             // 
             this.BtnStartFds.AutoSize = true;
@@ -213,6 +227,7 @@
             this.BtnPickFile.TabIndex = 1;
             this.BtnPickFile.Text = "Pick Data File";
             this.BtnPickFile.UseVisualStyleBackColor = true;
+            this.BtnPickFile.Click += new System.EventHandler(this.BtnPickFile_Click);
             // 
             // LblFdsDataFile
             // 
@@ -225,22 +240,6 @@
             this.LblFdsDataFile.Name = "LblFdsDataFile";
             this.LblFdsDataFile.Size = new System.Drawing.Size(1588, 35);
             this.LblFdsDataFile.TabIndex = 2;
-            this.LblFdsDataFile.Text = "C:\\Users\\Documents\\FDS\\SubFolder\\123456.fds";
-            // 
-            // 
-            // BtnStopFds
-            // 
-            this.BtnStopFds.AutoSize = true;
-            this.BtnStopFds.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnStopFds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnStopFds.Location = new System.Drawing.Point(329, 90);
-            this.BtnStopFds.Margin = new System.Windows.Forms.Padding(10);
-            this.BtnStopFds.Name = "BtnStopFds";
-            this.BtnStopFds.Size = new System.Drawing.Size(299, 60);
-            this.BtnStopFds.TabIndex = 5;
-            this.BtnStopFds.Text = "Stop FDS";
-            this.BtnStopFds.UseVisualStyleBackColor = true;
-            this.BtnStopFds.Click += new System.EventHandler(this.BtnStopFds_Click);
             // 
             // FdsForm
             // 
