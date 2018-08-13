@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Threading;
+using FdsLauncher.Properties;
+using System.Diagnostics;
+using System.IO;
 
 namespace FdsLauncher
 
@@ -27,52 +30,43 @@ namespace FdsLauncher
             string fdsExeFile = fdsArgs[0];
             string fdsDataFile = fdsArgs[1];
 
-            // TODO: Start async process and send output to progress monitor
-            string output = "";
-            output = "Test 1";
-            bgWorker.ReportProgress(0, output);
-            Thread.Sleep(5000);
-            if (bgWorker.CancellationPending)
+            // Create process object
+            Process fdsProcess = new Process();
+            fdsProcess.StartInfo.CreateNoWindow = true;
+            fdsProcess.StartInfo.LoadUserProfile = true;
+            fdsProcess.StartInfo.UseShellExecute = false;
+            fdsProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(fdsDataFile);
+            fdsProcess.StartInfo.FileName = Settings.Default.FdsExe;
+            fdsProcess.StartInfo.RedirectStandardOutput = true;
+            fdsProcess.StartInfo.RedirectStandardError = true;
+            fdsProcess.OutputDataReceived += (send, args) => { bgWorker.ReportProgress(0, args.Data); };
+            fdsProcess.ErrorDataReceived += (send, args) => { bgWorker.ReportProgress(0, args.Data); };
+            fdsProcess.StartInfo.Arguments = Path.GetFileName(fdsDataFile);
+
+            // Start async process
+            fdsProcess.Start();
+            fdsProcess.BeginOutputReadLine();
+            fdsProcess.BeginErrorReadLine();
+
+            while (!fdsProcess.HasExited)
             {
-                // TODO: To to this properly, write .stop file and wait for exit
-                e.Cancel = true;
-                return;
+                Thread.Sleep(2000);
+                if (bgWorker.CancellationPending)
+                {
+                    // TODO: To to this properly, write .stop file and wait for exit
+                    if (fdsProcess != null)
+                    {
+
+                        // Kill FDS process
+                        fdsProcess.CancelOutputRead();
+                        fdsProcess.CancelErrorRead();
+                        fdsProcess.Kill();
+                        fdsProcess.Dispose();
+                    }
+                    e.Cancel = true;
+                    break;
+                }
             }
-            output = "Test 2";
-            bgWorker.ReportProgress(0, output);
-            Thread.Sleep(5000);
-            if (bgWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            output = "Test 3";
-            bgWorker.ReportProgress(0, output);
-            Thread.Sleep(5000);
-            if (bgWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            output = "Test 4";
-            bgWorker.ReportProgress(0, output);
-            Thread.Sleep(5000);
-            if (bgWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            output = "Test 5";
-            bgWorker.ReportProgress(0, output);
-            Thread.Sleep(5000);
-            if (bgWorker.CancellationPending)
-            {
-                e.Cancel = true;
-                return;
-            }
-            output = "Test 6";
-            bgWorker.ReportProgress(0, output);
-            Thread.Sleep(5000);
 
         }
 
@@ -108,9 +102,9 @@ namespace FdsLauncher
 
             // Start background worker
             myFdsForm.ClearConsole();
+            myFdsForm.AddConsoleLine("--------------------");
             myFdsForm.AddConsoleLine("Starting FDS process");
-            bgWorker.ReportProgress(0, "Exe = " + fdsArgs[0]);
-            bgWorker.ReportProgress(0, "Data = " + fdsArgs[1]);
+            myFdsForm.AddConsoleLine("--------------------");
             bgWorker.RunWorkerAsync(fdsArgs);
 
         }
@@ -131,16 +125,22 @@ namespace FdsLauncher
             // Check exit
             if (e.Cancelled == true)
             {
-                myFdsForm.AddConsoleLine("Processed cancelled");
+                myFdsForm.AddConsoleLine("-----------");
+                myFdsForm.AddConsoleLine("FDS stopped");
+                myFdsForm.AddConsoleLine("-----------");
             }
             else if (e.Error != null)
             {
+                myFdsForm.AddConsoleLine("---------------");
                 myFdsForm.AddConsoleLine("Error occurred:");
                 myFdsForm.AddConsoleLine(e.Error.Message);
+                myFdsForm.AddConsoleLine("---------------");
             }
             else
             {
+                myFdsForm.AddConsoleLine("---------");
                 myFdsForm.AddConsoleLine("Exited OK");
+                myFdsForm.AddConsoleLine("---------");
             }
 
             // Restore buttons/menus

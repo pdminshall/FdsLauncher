@@ -171,6 +171,7 @@ namespace FdsLauncher
 
             OpenFileDialog fileDialog = new OpenFileDialog
             {
+                Filter = "FDS files (*.fds)|*.fds",
                 CheckFileExists = true,
                 CheckPathExists = true,
                 DefaultExt = ".fds",
