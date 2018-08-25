@@ -12,6 +12,9 @@ namespace FdsLauncher
 {
     public partial class FdsForm : Form
     {
+        // Local FDS file reference
+        FdsFile MyFdsFile;
+
         public FdsForm()
         {
             InitializeComponent();

@@ -45,6 +45,7 @@
             this.ListBoxConsole = new System.Windows.Forms.ListBox();
             this.BtnPickFile = new System.Windows.Forms.Button();
             this.LblFdsDataFile = new System.Windows.Forms.Label();
+            this.LblChId = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -134,6 +135,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.LblChId, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnStopFds, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.BtnStartFds, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.BtnTestFds, 0, 1);
@@ -233,13 +235,25 @@
             // 
             this.LblFdsDataFile.AutoSize = true;
             this.LblFdsDataFile.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tableLayoutPanel1.SetColumnSpan(this.LblFdsDataFile, 5);
+            this.tableLayoutPanel1.SetColumnSpan(this.LblFdsDataFile, 3);
             this.LblFdsDataFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblFdsDataFile.Location = new System.Drawing.Point(4, 160);
             this.LblFdsDataFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblFdsDataFile.Name = "LblFdsDataFile";
-            this.LblFdsDataFile.Size = new System.Drawing.Size(1588, 35);
+            this.LblFdsDataFile.Size = new System.Drawing.Size(949, 35);
             this.LblFdsDataFile.TabIndex = 2;
+            // 
+            // LblChId
+            // 
+            this.LblChId.AutoSize = true;
+            this.LblChId.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tableLayoutPanel1.SetColumnSpan(this.LblChId, 2);
+            this.LblChId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblChId.Location = new System.Drawing.Point(961, 160);
+            this.LblChId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblChId.Name = "LblChId";
+            this.LblChId.Size = new System.Drawing.Size(631, 35);
+            this.LblChId.TabIndex = 6;
             // 
             // FdsForm
             // 
@@ -286,6 +300,7 @@
         private System.Windows.Forms.Button BtnTestFds;
         private System.Windows.Forms.Button BtnStartFds;
         private System.Windows.Forms.Button BtnStopFds;
+        private System.Windows.Forms.Label LblChId;
     }
 }
 

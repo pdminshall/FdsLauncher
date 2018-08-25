@@ -142,10 +142,10 @@ namespace FdsLauncher
             // Build arguments for background worker
             string fdsExeFile = Settings.Default.FdsExe;
             string fdsDataFile = LblFdsDataFile.Text;
-            List<string> fdsArgs = new List<string>
+            List<object> fdsArgs = new List<object>
             {
                 fdsExeFile,
-                fdsDataFile
+                MyFdsFile
             };
 
             // Run wrapper function to start background worker
@@ -186,6 +186,11 @@ namespace FdsLauncher
             {
                 LblFdsDataFile.Text = fileDialog.FileName;
             }
+
+            // Load FDS file
+            MyFdsFile = new FdsFile(LblFdsDataFile.Text);
+            LblChId.Text = "CHID = '" + MyFdsFile.ChId + "'";
+
             RefreshAllButtons();
         }
     }

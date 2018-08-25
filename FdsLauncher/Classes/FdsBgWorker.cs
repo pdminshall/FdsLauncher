@@ -26,22 +26,23 @@ namespace FdsLauncher
         {
 
             // Unpack arguments
-            List<string> fdsArgs = (List<string>)e.Argument;
-            string fdsExeFile = fdsArgs[0];
-            string fdsDataFile = fdsArgs[1];
+            List<object> fdsArgs = (List<object>)e.Argument;
+            string fdsExeFile = (string)fdsArgs[0];
+            FdsFile fdsFile = (FdsFile)fdsArgs[1];
+            string stopFile = Path.GetDirectoryName(fdsFile.FilePath) + @"\" + fdsFile.ChId + ".stop";
 
             // Create process object
             Process fdsProcess = new Process();
             fdsProcess.StartInfo.CreateNoWindow = true;
             fdsProcess.StartInfo.LoadUserProfile = true;
             fdsProcess.StartInfo.UseShellExecute = false;
-            fdsProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(fdsDataFile);
+            fdsProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(fdsFile.FilePath);
             fdsProcess.StartInfo.FileName = Settings.Default.FdsExe;
             fdsProcess.StartInfo.RedirectStandardOutput = true;
             fdsProcess.StartInfo.RedirectStandardError = true;
             fdsProcess.OutputDataReceived += (send, args) => { bgWorker.ReportProgress(0, args.Data); };
             fdsProcess.ErrorDataReceived += (send, args) => { bgWorker.ReportProgress(0, args.Data); };
-            fdsProcess.StartInfo.Arguments = Path.GetFileName(fdsDataFile);
+            fdsProcess.StartInfo.Arguments = Path.GetFileName(fdsFile.FilePath);
 
             // Start async process
             fdsProcess.Start();
@@ -53,20 +54,28 @@ namespace FdsLauncher
                 Thread.Sleep(2000);
                 if (bgWorker.CancellationPending)
                 {
-                    // TODO: To to this properly, write .stop file and wait for exit
+                    // To to this properly, write .stop file and wait for exit
                     if (fdsProcess != null)
                     {
 
                         // Kill FDS process
+                        /*
                         fdsProcess.CancelOutputRead();
                         fdsProcess.CancelErrorRead();
                         fdsProcess.Kill();
                         fdsProcess.Dispose();
+                        */
+                        bgWorker.ReportProgress(0, "Sending STOP process..");
+                        FileStream fileStream = File.Create(stopFile);
+                        fileStream.Close();
+                        fileStream.Dispose();
                     }
                     e.Cancel = true;
                     break;
                 }
             }
+            fdsProcess.CancelOutputRead();
+            fdsProcess.CancelErrorRead();
 
         }
 
@@ -80,7 +89,7 @@ namespace FdsLauncher
         }
 
         // Wrapper method to start FDS background worker
-        public static void StartFds(FdsForm fdsForm, List<string> fdsArgs)
+        public static void StartFds(FdsForm fdsForm, List<object> fdsArgs)
         {
 
             // TODO: Need to verify that RESTART is set in FDS file. This may be a restart.
