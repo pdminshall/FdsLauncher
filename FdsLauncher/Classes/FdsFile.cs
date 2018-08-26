@@ -37,6 +37,7 @@ namespace FdsLauncher
             FilePath = filePath;
             IsValidFile = false;
             ChId = "";
+            IsRestart = false;
 
             // Check for file existance
             if (!File.Exists(FilePath)) { return; }
@@ -63,10 +64,17 @@ namespace FdsLauncher
                 // Look for HEAD and CHID
                 if (line.StartsWith("&HEAD"))
                 {
-                    Regex filter = new Regex(@"'[^']*'");
-
+                    Regex filter = new Regex(@"CHID='[^']*'");
                     Match match = filter.Match(line);
-                    if (match.Success) { ChId = match.Value.Trim('\''); }
+                    string val = match.Value.Replace("CHID=", "").Trim('\'');
+
+                    if (match.Success) { ChId = val; }
+                }
+
+                // Look for RESTART flag
+                if (line.StartsWith("&MISC") && line.Contains("RESTART=.TRUE."))
+                {
+                    IsRestart = true;
                 }
 
             }

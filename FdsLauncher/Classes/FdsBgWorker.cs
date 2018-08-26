@@ -44,6 +44,16 @@ namespace FdsLauncher
             fdsProcess.ErrorDataReceived += (send, args) => { bgWorker.ReportProgress(0, args.Data); };
             fdsProcess.StartInfo.Arguments = Path.GetFileName(fdsFile.FilePath);
 
+            // Remove old STOP file
+            if (File.Exists(stopFile))
+            {
+                try
+                {
+                    File.Delete(stopFile);
+                }
+                catch (Exception) { }
+            }
+
             // Start async process
             fdsProcess.Start();
             fdsProcess.BeginOutputReadLine();
@@ -65,10 +75,14 @@ namespace FdsLauncher
                         fdsProcess.Kill();
                         fdsProcess.Dispose();
                         */
-                        bgWorker.ReportProgress(0, "Sending STOP process..");
-                        FileStream fileStream = File.Create(stopFile);
-                        fileStream.Close();
-                        fileStream.Dispose();
+                        bgWorker.ReportProgress(0, "Sending STOP file..");
+                        try
+                        {
+                            FileStream fileStream = File.Create(stopFile);
+                            fileStream.Close();
+                            fileStream.Dispose();
+                        }
+                        catch (Exception) { }
                     }
                     e.Cancel = true;
                     break;

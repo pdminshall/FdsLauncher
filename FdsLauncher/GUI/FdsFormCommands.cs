@@ -139,6 +139,13 @@ namespace FdsLauncher
             // Check if exe and data is valid
             if (!File.Exists(LblFdsDataFile.Text) || !File.Exists(Settings.Default.FdsExe)) { return; }
 
+            // Reload file and check restart flag
+            MyFdsFile.LoadFile();
+            if (!MyFdsFile.IsRestart)
+            {
+                // TODO: Ask if really want to start
+            }
+
             // Build arguments for background worker
             string fdsExeFile = Settings.Default.FdsExe;
             string fdsDataFile = LblFdsDataFile.Text;
