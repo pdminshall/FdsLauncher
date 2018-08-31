@@ -106,8 +106,6 @@ namespace FdsLauncher
         public static void StartFds(FdsForm fdsForm, List<object> fdsArgs)
         {
 
-            // TODO: Need to verify that RESTART is set in FDS file. This may be a restart.
-
             if (IsBgRunning()) { return; }
 
             // Get reference to form

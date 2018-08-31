@@ -39,13 +39,14 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuSettingsDataFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.LblChId = new System.Windows.Forms.Label();
             this.BtnStopFds = new System.Windows.Forms.Button();
             this.BtnStartFds = new System.Windows.Forms.Button();
             this.BtnTestFds = new System.Windows.Forms.Button();
             this.ListBoxConsole = new System.Windows.Forms.ListBox();
             this.BtnPickFile = new System.Windows.Forms.Button();
             this.LblFdsDataFile = new System.Windows.Forms.Label();
-            this.LblChId = new System.Windows.Forms.Label();
+            this.LblRestartFlag = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -135,7 +136,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.LblChId, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.LblRestartFlag, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.LblChId, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.BtnStopFds, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.BtnStartFds, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.BtnTestFds, 0, 1);
@@ -152,8 +154,20 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1596, 327);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1596, 865);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // LblChId
+            // 
+            this.LblChId.AutoSize = true;
+            this.LblChId.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tableLayoutPanel1.SetColumnSpan(this.LblChId, 2);
+            this.LblChId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblChId.Location = new System.Drawing.Point(642, 160);
+            this.LblChId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblChId.Name = "LblChId";
+            this.LblChId.Size = new System.Drawing.Size(630, 35);
+            this.LblChId.TabIndex = 6;
             // 
             // BtnStopFds
             // 
@@ -214,7 +228,7 @@
             this.ListBoxConsole.Name = "ListBoxConsole";
             this.ListBoxConsole.ScrollAlwaysVisible = true;
             this.ListBoxConsole.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.ListBoxConsole.Size = new System.Drawing.Size(1588, 183);
+            this.ListBoxConsole.Size = new System.Drawing.Size(1588, 658);
             this.ListBoxConsole.TabIndex = 0;
             // 
             // BtnPickFile
@@ -235,31 +249,30 @@
             // 
             this.LblFdsDataFile.AutoSize = true;
             this.LblFdsDataFile.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tableLayoutPanel1.SetColumnSpan(this.LblFdsDataFile, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.LblFdsDataFile, 2);
             this.LblFdsDataFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LblFdsDataFile.Location = new System.Drawing.Point(4, 160);
             this.LblFdsDataFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblFdsDataFile.Name = "LblFdsDataFile";
-            this.LblFdsDataFile.Size = new System.Drawing.Size(949, 35);
+            this.LblFdsDataFile.Size = new System.Drawing.Size(630, 35);
             this.LblFdsDataFile.TabIndex = 2;
             // 
-            // LblChId
+            // LblRestartFlag
             // 
-            this.LblChId.AutoSize = true;
-            this.LblChId.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tableLayoutPanel1.SetColumnSpan(this.LblChId, 2);
-            this.LblChId.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblChId.Location = new System.Drawing.Point(961, 160);
-            this.LblChId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LblChId.Name = "LblChId";
-            this.LblChId.Size = new System.Drawing.Size(631, 35);
-            this.LblChId.TabIndex = 6;
+            this.LblRestartFlag.AutoSize = true;
+            this.LblRestartFlag.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblRestartFlag.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblRestartFlag.Location = new System.Drawing.Point(1280, 160);
+            this.LblRestartFlag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblRestartFlag.Name = "LblRestartFlag";
+            this.LblRestartFlag.Size = new System.Drawing.Size(312, 35);
+            this.LblRestartFlag.TabIndex = 7;
             // 
             // FdsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1596, 367);
+            this.ClientSize = new System.Drawing.Size(1596, 905);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
@@ -301,6 +314,7 @@
         private System.Windows.Forms.Button BtnStartFds;
         private System.Windows.Forms.Button BtnStopFds;
         private System.Windows.Forms.Label LblChId;
+        private System.Windows.Forms.Label LblRestartFlag;
     }
 }
 
