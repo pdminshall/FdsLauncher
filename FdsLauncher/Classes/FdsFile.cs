@@ -22,6 +22,8 @@ namespace FdsLauncher
 
         public string ChId { get; private set; }
 
+        public string Title { get; private set; } = "";
+
         public bool IsRestart { get; private set; }
 
         // Constructor
@@ -61,7 +63,7 @@ namespace FdsLauncher
             // TODO: Parse file for parameters
             foreach (string line in FileContents)
             {
-                // Look for HEAD and CHID
+                // Look for HEAD, CHID and TITLE
                 if (line.StartsWith("&HEAD"))
                 {
                     Regex filter = new Regex(@"CHID='[^']*'");
@@ -69,6 +71,12 @@ namespace FdsLauncher
                     string val = match.Value.Replace("CHID=", "").Trim('\'');
 
                     if (match.Success) { ChId = val; }
+
+                    Regex filter2 = new Regex(@"TITLE='[^']*'");
+                    Match match2 = filter2.Match(line);
+                    string val2 = match2.Value.Replace("TITLE=", "").Trim('\'');
+
+                    if (match2.Success) { Title = val2; }
                 }
 
                 // Look for RESTART flag

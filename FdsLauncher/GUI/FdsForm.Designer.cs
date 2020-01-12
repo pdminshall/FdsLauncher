@@ -39,6 +39,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuSettingsDataFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.LblRestartFlag = new System.Windows.Forms.Label();
             this.LblChId = new System.Windows.Forms.Label();
             this.BtnStopFds = new System.Windows.Forms.Button();
             this.BtnStartFds = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@
             this.ListBoxConsole = new System.Windows.Forms.ListBox();
             this.BtnPickFile = new System.Windows.Forms.Button();
             this.LblFdsDataFile = new System.Windows.Forms.Label();
-            this.LblRestartFlag = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -76,18 +76,18 @@
             // MenuAbout
             // 
             this.MenuAbout.Name = "MenuAbout";
-            this.MenuAbout.Size = new System.Drawing.Size(179, 38);
+            this.MenuAbout.Size = new System.Drawing.Size(324, 38);
             this.MenuAbout.Text = "About";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(176, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(321, 6);
             // 
             // MenuExit
             // 
             this.MenuExit.Name = "MenuExit";
-            this.MenuExit.Size = new System.Drawing.Size(179, 38);
+            this.MenuExit.Size = new System.Drawing.Size(324, 38);
             this.MenuExit.Text = "Exit";
             this.MenuExit.Click += new System.EventHandler(this.MenuExit_Click);
             // 
@@ -105,26 +105,26 @@
             // MenuSettingsFdsExe
             // 
             this.MenuSettingsFdsExe.Name = "MenuSettingsFdsExe";
-            this.MenuSettingsFdsExe.Size = new System.Drawing.Size(281, 38);
+            this.MenuSettingsFdsExe.Size = new System.Drawing.Size(324, 38);
             this.MenuSettingsFdsExe.Text = "FDS Exe";
             this.MenuSettingsFdsExe.Click += new System.EventHandler(this.MenuSettingsFdsExe_Click);
             // 
             // MenuSettingsSmvExe
             // 
             this.MenuSettingsSmvExe.Name = "MenuSettingsSmvExe";
-            this.MenuSettingsSmvExe.Size = new System.Drawing.Size(281, 38);
+            this.MenuSettingsSmvExe.Size = new System.Drawing.Size(324, 38);
             this.MenuSettingsSmvExe.Text = "SmokeView Exe";
             this.MenuSettingsSmvExe.Click += new System.EventHandler(this.MenuSettingsSmvExe_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(278, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(321, 6);
             // 
             // MenuSettingsDataFolder
             // 
             this.MenuSettingsDataFolder.Name = "MenuSettingsDataFolder";
-            this.MenuSettingsDataFolder.Size = new System.Drawing.Size(281, 38);
+            this.MenuSettingsDataFolder.Size = new System.Drawing.Size(324, 38);
             this.MenuSettingsDataFolder.Text = "Data Folder";
             this.MenuSettingsDataFolder.Click += new System.EventHandler(this.MenuSettingsDataFolder_Click);
             // 
@@ -151,22 +151,38 @@
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1596, 865);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // LblRestartFlag
+            // 
+            this.LblRestartFlag.AutoSize = true;
+            this.LblRestartFlag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.LblRestartFlag.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.LblRestartFlag.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblRestartFlag.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblRestartFlag.Location = new System.Drawing.Point(1280, 160);
+            this.LblRestartFlag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LblRestartFlag.Name = "LblRestartFlag";
+            this.LblRestartFlag.Padding = new System.Windows.Forms.Padding(10);
+            this.LblRestartFlag.Size = new System.Drawing.Size(312, 50);
+            this.LblRestartFlag.TabIndex = 7;
             // 
             // LblChId
             // 
             this.LblChId.AutoSize = true;
+            this.LblChId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.LblChId.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tableLayoutPanel1.SetColumnSpan(this.LblChId, 2);
             this.LblChId.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblChId.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblChId.Location = new System.Drawing.Point(642, 160);
             this.LblChId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblChId.Name = "LblChId";
-            this.LblChId.Size = new System.Drawing.Size(630, 35);
+            this.LblChId.Padding = new System.Windows.Forms.Padding(10);
+            this.LblChId.Size = new System.Drawing.Size(630, 50);
             this.LblChId.TabIndex = 6;
             // 
             // BtnStopFds
@@ -223,7 +239,7 @@
             this.ListBoxConsole.Items.AddRange(new object[] {
             "Test Line 1",
             "Test Line 2"});
-            this.ListBoxConsole.Location = new System.Drawing.Point(4, 201);
+            this.ListBoxConsole.Location = new System.Drawing.Point(4, 216);
             this.ListBoxConsole.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ListBoxConsole.Name = "ListBoxConsole";
             this.ListBoxConsole.ScrollAlwaysVisible = true;
@@ -248,25 +264,17 @@
             // LblFdsDataFile
             // 
             this.LblFdsDataFile.AutoSize = true;
+            this.LblFdsDataFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.LblFdsDataFile.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tableLayoutPanel1.SetColumnSpan(this.LblFdsDataFile, 2);
             this.LblFdsDataFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblFdsDataFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblFdsDataFile.Location = new System.Drawing.Point(4, 160);
             this.LblFdsDataFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblFdsDataFile.Name = "LblFdsDataFile";
-            this.LblFdsDataFile.Size = new System.Drawing.Size(630, 35);
+            this.LblFdsDataFile.Padding = new System.Windows.Forms.Padding(10);
+            this.LblFdsDataFile.Size = new System.Drawing.Size(630, 50);
             this.LblFdsDataFile.TabIndex = 2;
-            // 
-            // LblRestartFlag
-            // 
-            this.LblRestartFlag.AutoSize = true;
-            this.LblRestartFlag.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LblRestartFlag.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LblRestartFlag.Location = new System.Drawing.Point(1280, 160);
-            this.LblRestartFlag.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LblRestartFlag.Name = "LblRestartFlag";
-            this.LblRestartFlag.Size = new System.Drawing.Size(312, 35);
-            this.LblRestartFlag.TabIndex = 7;
             // 
             // FdsForm
             // 

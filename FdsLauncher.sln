@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FdsLauncher", "FdsLauncher\FdsLauncher.csproj", "{73CA620E-B04B-4420-860D-77FE955234AF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FdsLauncherInstaller", "FdsLauncherInstaller\FdsLauncherInstaller.vdproj", "{2C556983-3296-4CF2-84D9-005D9D4419F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{73CA620E-B04B-4420-860D-77FE955234AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73CA620E-B04B-4420-860D-77FE955234AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73CA620E-B04B-4420-860D-77FE955234AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C556983-3296-4CF2-84D9-005D9D4419F8}.Debug|Any CPU.ActiveCfg = Debug
+		{2C556983-3296-4CF2-84D9-005D9D4419F8}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -220,7 +220,7 @@ namespace FdsLauncher
 
             // Load FDS file
             MyFdsFile = new FdsFile(LblFdsDataFile.Text);
-            LblChId.Text = "CHID = '" + MyFdsFile.ChId + "'";
+            LblChId.Text = "CHID='" + MyFdsFile.ChId + "' (" + MyFdsFile.Title + ")";
             LblRestartFlag.Text = "RESTART=." + (MyFdsFile.IsRestart ? "TRUE" : "FALSE") + ".";
 
             RefreshAllButtons();
