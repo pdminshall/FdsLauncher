@@ -1,0 +1,7 @@
+C:\git\FdsLauncher\FdsCodeLib\bin\Debug\FdsCodeLib.xml
+C:\git\FdsLauncher\FdsCodeLib\bin\Debug\FdsCodeLib.dll
+C:\git\FdsLauncher\FdsCodeLib\bin\Debug\FdsCodeLib.pdb
+C:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.csprojAssemblyReference.cache
+C:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.csproj.CoreCompileInputs.cache
+C:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.dll
+C:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.pdb

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FdsLauncher", "FdsLauncher\
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FdsLauncherInstaller", "FdsLauncherInstaller\FdsLauncherInstaller.vdproj", "{2C556983-3296-4CF2-84D9-005D9D4419F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FdsCodeLib", "FdsCodeLib\FdsCodeLib.csproj", "{66CF0C9F-4ADA-4DE5-8197-A15988E93764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{73CA620E-B04B-4420-860D-77FE955234AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C556983-3296-4CF2-84D9-005D9D4419F8}.Debug|Any CPU.ActiveCfg = Debug
 		{2C556983-3296-4CF2-84D9-005D9D4419F8}.Release|Any CPU.ActiveCfg = Release
+		{66CF0C9F-4ADA-4DE5-8197-A15988E93764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CF0C9F-4ADA-4DE5-8197-A15988E93764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CF0C9F-4ADA-4DE5-8197-A15988E93764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CF0C9F-4ADA-4DE5-8197-A15988E93764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

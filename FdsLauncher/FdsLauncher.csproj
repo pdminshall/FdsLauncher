@@ -75,7 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\FdsFile.cs" />
     <Compile Include="GUI\FdsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +136,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FdsCodeLib\FdsCodeLib.csproj">
+      <Project>{66cf0c9f-4ada-4de5-8197-a15988e93764}</Project>
+      <Name>FdsCodeLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,35 +6,69 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace FdsLauncher
+namespace FdsCodeLib
 {
+    /// <summary>
+    /// Class to represent complete FDS data file.
+    /// </summary>
     public class FdsFile
     {
 
-        // Parameters
+        /// <summary>
+        /// Path to file.
+        /// </summary>
         public string FilePath { get; private set; }
 
+        /// <summary>
+        /// Master validity switch.
+        /// </summary>
         public bool IsValidFile { get; private set; }
 
+        /// <summary>
+        /// Validation error.
+        /// </summary>
         public string ErrorMessage { get; private set; }
 
+        /// <summary>
+        /// Original file contents.
+        /// </summary>
         public List<string> FileContents { get; private set; }
 
-        public List<string> CommandLines { get; private set; }
+        /// <summary>
+        /// List of command objects.
+        /// </summary>
+        public List<FdsCmd> Commands { get; private set; }
 
+        /// <summary>
+        /// Unique file ID.
+        /// </summary>
         public string ChId { get; private set; }
 
+        /// <summary>
+        /// Title of file.
+        /// </summary>
         public string Title { get; private set; } = "";
 
+        /// <summary>
+        /// Master restart flag.
+        /// </summary>
         public bool IsRestart { get; private set; }
 
-        // Constructor
+        /// <summary>
+        /// Constructor using file location.
+        /// </summary>
+        /// <param name="filePath">Path to FDS data file.</param>
         public FdsFile(string filePath) { LoadFile(filePath); }
 
-        // Method to load and parse existing file
+        /// <summary>
+        /// Method to load FDS data file into memory.
+        /// </summary>
         public void LoadFile() { LoadFile(FilePath); }
 
-        // Method to load and parse named file
+        /// <summary>
+        /// Method to load file using named file path.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
         private void LoadFile(string filePath)
         {
             // Reset parameters
@@ -66,7 +100,7 @@ namespace FdsLauncher
             ParseCommands();
 
             // TODO: Parse file for parameters
-            foreach (string line in CommandLines)
+            foreach (string line in FileContents)
             {
                 // Look for HEAD, CHID and TITLE
                 if (line.StartsWith("HEAD"))
@@ -100,18 +134,24 @@ namespace FdsLauncher
         }
 
         /// <summary>
-        /// Method to group file lines into separate commands, using & and / characters as
+        /// Method to group file lines into separate commands, using &amp; and / characters as
         /// start and end points.
         /// </summary>
         private void ParseCommands()
         {
             // Start state machine
-            string commandLine = "";
             string state = "";
-            CommandLines = new List<string>();
+            int commandNum = 0;
+            int lineNum = 0;
+            int startNum = 0;
+            int endNum = 0;
+            string originalLines = "";
+            Commands = new List<FdsCmd>();
 
             foreach (string line in FileContents)
             {
+                lineNum++;
+
                 string myLine = line;
 
                 // Remove white space from start and end of line
@@ -120,40 +160,40 @@ namespace FdsLauncher
                 // Single line command
                 if (state == "" && myLine.StartsWith("&") && myLine.EndsWith("/"))
                 {
-                    commandLine = myLine.TrimStart('&').TrimEnd('/').Trim();
-                    CommandLines.Add(commandLine);
+                    startNum = lineNum;
+                    endNum = lineNum;
+                    originalLines = myLine;
+                    commandNum++;
+                    FdsCmd fdsCmd = FdsCmdFactory.Create(originalLines, startNum, endNum, commandNum);
+                    Commands.Add(fdsCmd);
+                    continue;
                 }
 
                 // Detect start of multi-line command
                 if (state == "" && myLine.StartsWith("&") && !myLine.EndsWith("/"))
                 {
                     // Clear out command line and remove &
-                    commandLine = myLine.TrimStart('&').Trim();
+                    startNum = lineNum;
+                    originalLines = myLine;
                     state = "CMD";
+                    continue;
                 }
 
                 // Intermediate command line
                 if (state == "CMD" && !myLine.StartsWith("&") && !myLine.EndsWith("/"))
                 {
-                    if (!commandLine.EndsWith(",") && !myLine.StartsWith(",") &&
-                        myLine != "")
-                    {
-                        commandLine += ",";
-                    }
-                    commandLine += myLine;
+                    originalLines += "\n" + myLine;
                 }
 
                 // End of multi-line command
                 if (state == "CMD" && !myLine.StartsWith("&") && myLine.EndsWith("/"))
                 {
-                    if (!commandLine.EndsWith(",") && !myLine.StartsWith(",") &&
-                        !myLine.StartsWith("/"))
-                    {
-                        commandLine += ",";
-                    }
-                    commandLine += myLine.TrimEnd('/').Trim();
-                    CommandLines.Add(commandLine);
+                    originalLines += "\n" + myLine;
+                    endNum = lineNum;
+                    commandNum++;
                     state = "";
+                    FdsCmd fdsCmd = FdsCmdFactory.Create(originalLines, startNum, endNum, commandNum);
+                    Commands.Add(fdsCmd);
                 }
 
             }

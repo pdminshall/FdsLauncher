@@ -8,6 +8,7 @@ using System.Threading;
 using FdsLauncher.Properties;
 using System.Diagnostics;
 using System.IO;
+using FdsCodeLib;
 
 namespace FdsLauncher
 
