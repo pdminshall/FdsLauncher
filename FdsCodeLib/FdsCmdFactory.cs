@@ -21,9 +21,10 @@ namespace FdsCodeLib
         /// <param name="endLineNum">End line number for command.</param>
         /// <param name="commandNum">Sequential command number.</param>
         /// <returns></returns>
-        public static FdsCmd Create(string originalLines, int startLineNum, int endLineNum, int commandNum)
+        public static FdsCmd Create(List<string> originalLines, int startLineNum, int endLineNum, int commandNum)
         {
             FdsCmd newFdsCmd = new FdsCmd(originalLines, startLineNum, endLineNum, commandNum);
+
             return newFdsCmd;
         }
     }

@@ -39,7 +39,7 @@
             Command sequence number in original file.
             </summary>
         </member>
-        <member name="M:FdsCodeLib.FdsCmd.#ctor(System.String,System.Int32,System.Int32,System.Int32)">
+        <member name="M:FdsCodeLib.FdsCmd.#ctor(System.Collections.Generic.List{System.String},System.Int32,System.Int32,System.Int32)">
             <summary>
             Constructor with arguments to set command line.
             </summary>
@@ -48,12 +48,17 @@
             <param name="endLineNum">End line number of command.</param>
             <param name="commandNum">Sequential number of command.</param>
         </member>
+        <member name="M:FdsCodeLib.FdsCmd.ParseCommand">
+            <summary>
+            Convert original code lines into single command.
+            </summary>
+        </member>
         <member name="T:FdsCodeLib.FdsCmdFactory">
             <summary>
             Factory class for all FDS commands.
             </summary>
         </member>
-        <member name="M:FdsCodeLib.FdsCmdFactory.Create(System.String,System.Int32,System.Int32,System.Int32)">
+        <member name="M:FdsCodeLib.FdsCmdFactory.Create(System.Collections.Generic.List{System.String},System.Int32,System.Int32,System.Int32)">
             <summary>
             Create new sub-classed FdsCmd object.
             </summary>

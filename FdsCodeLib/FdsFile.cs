@@ -145,7 +145,7 @@ namespace FdsCodeLib
             int lineNum = 0;
             int startNum = 0;
             int endNum = 0;
-            string originalLines = "";
+            List<string> originalLines = new List<string>();
             Commands = new List<FdsCmd>();
 
             foreach (string line in FileContents)
@@ -162,7 +162,10 @@ namespace FdsCodeLib
                 {
                     startNum = lineNum;
                     endNum = lineNum;
-                    originalLines = myLine;
+                    originalLines = new List<string>
+                    {
+                        myLine
+                    };
                     commandNum++;
                     FdsCmd fdsCmd = FdsCmdFactory.Create(originalLines, startNum, endNum, commandNum);
                     Commands.Add(fdsCmd);
@@ -174,7 +177,10 @@ namespace FdsCodeLib
                 {
                     // Clear out command line and remove &
                     startNum = lineNum;
-                    originalLines = myLine;
+                    originalLines = new List<string>
+                    {
+                        myLine
+                    };
                     state = "CMD";
                     continue;
                 }
@@ -182,13 +188,13 @@ namespace FdsCodeLib
                 // Intermediate command line
                 if (state == "CMD" && !myLine.StartsWith("&") && !myLine.EndsWith("/"))
                 {
-                    originalLines += "\n" + myLine;
+                    originalLines.Add(myLine);
                 }
 
                 // End of multi-line command
                 if (state == "CMD" && !myLine.StartsWith("&") && myLine.EndsWith("/"))
                 {
-                    originalLines += "\n" + myLine;
+                    originalLines.Add(myLine);
                     endNum = lineNum;
                     commandNum++;
                     state = "";

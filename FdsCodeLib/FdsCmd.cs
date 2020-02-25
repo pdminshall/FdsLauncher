@@ -17,10 +17,13 @@ namespace FdsCodeLib
         /// </summary>
         public FdsCmdType CommandType { get; private set; } = FdsCmdType.NONE;
 
+        // Command name as string
+        public string CommandName { get; private set; } = "";
+
         /// <summary>
         /// Original code lines from FDS data file.
         /// </summary>
-        public string OriginalLines { get; private set; } = "";
+        public List<string> OriginalLines { get; private set; } = new List<string>();
 
         /// <summary>
         /// Command line, parsed from original FDS data file.
@@ -49,12 +52,52 @@ namespace FdsCodeLib
         /// <param name="startLineNum">Start line number of command.</param>
         /// <param name="endLineNum">End line number of command.</param>
         /// <param name="commandNum">Sequential number of command.</param>
-        public FdsCmd(string originalLines, int startLineNum, int endLineNum, int commandNum)
+        public FdsCmd(List<string> originalLines, int startLineNum, int endLineNum, int commandNum)
         {
             OriginalLines = originalLines;
             StartLineNum = startLineNum;
             EndLineNum = endLineNum;
             CommandNum = commandNum;
+
+            ParseCommand();
+        }
+
+        /// <summary>
+        /// Convert original code lines into single command.
+        /// </summary>
+        private void ParseCommand()
+        {
+            CommandLine = "";
+
+            foreach (string line in OriginalLines)
+            {
+                string myLine = line.Trim();
+
+                // Insert missing comma between lines
+                if (CommandLine != "" && !CommandLine.EndsWith(",") &&
+                    myLine != "/" && !myLine.StartsWith(","))
+                {
+                    CommandLine += ",";
+                }
+
+                CommandLine += myLine;
+            }
+
+            // Remove & and /
+            CommandLine = CommandLine.TrimStart('&').TrimEnd('/').Trim();
+
+            // Extract command name
+            CommandName = CommandLine.Split(' ')[0];
+
+            try
+            {
+                CommandType = (FdsCmdType)Enum.Parse(typeof(FdsCmdType), CommandName);
+            }
+            catch (ArgumentException)
+            {
+                CommandType = FdsCmdType.NONE;
+            }
+
         }
 
     }
