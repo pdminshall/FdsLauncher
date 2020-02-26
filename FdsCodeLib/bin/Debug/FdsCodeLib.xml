@@ -4,6 +4,20 @@
         <name>FdsCodeLib</name>
     </assembly>
     <members>
+        <member name="T:FdsCodeLib.FdsCmdHead">
+            <summary>
+            HEAD command class.
+            </summary>
+        </member>
+        <member name="M:FdsCodeLib.FdsCmdHead.#ctor(System.Collections.Generic.List{System.String},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor with arguments.
+            </summary>
+            <param name="originalLines">Original lines from data file.</param>
+            <param name="startLineNum">Start line number of command.</param>
+            <param name="endLineNum">End line number of command.</param>
+            <param name="commandNum">Sequential number of command.</param>
+        </member>
         <member name="T:FdsCodeLib.FdsCmd">
             <summary>
             Base class for all FDS commands.
@@ -12,6 +26,11 @@
         <member name="P:FdsCodeLib.FdsCmd.CommandType">
             <summary>
             Command type, which determines which sub class to create.
+            </summary>
+        </member>
+        <member name="P:FdsCodeLib.FdsCmd.CommandName">
+            <summary>
+            Command name as string.
             </summary>
         </member>
         <member name="P:FdsCodeLib.FdsCmd.OriginalLines">

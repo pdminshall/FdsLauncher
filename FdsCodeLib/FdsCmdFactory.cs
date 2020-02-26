@@ -23,7 +23,27 @@ namespace FdsCodeLib
         /// <returns></returns>
         public static FdsCmd Create(List<string> originalLines, int startLineNum, int endLineNum, int commandNum)
         {
+
+            // Make base object first to calculate command type
             FdsCmd newFdsCmd = new FdsCmd(originalLines, startLineNum, endLineNum, commandNum);
+
+            // Make sub class object for each command type
+            switch (newFdsCmd.CommandType)
+            {
+                case FdsCmdType.HEAD:
+                    {
+                        // TODO: Make header object
+
+                        break;
+                    }
+                case FdsCmdType.MISC:
+                    {
+                        // TODO: Make misc object
+
+                        break;
+                    }
+
+            }
 
             return newFdsCmd;
         }

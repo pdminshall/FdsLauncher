@@ -17,7 +17,9 @@ namespace FdsCodeLib
         /// </summary>
         public FdsCmdType CommandType { get; private set; } = FdsCmdType.NONE;
 
-        // Command name as string
+        /// <summary>
+        /// Command name as string.
+        /// </summary>
         public string CommandName { get; private set; } = "";
 
         /// <summary>
