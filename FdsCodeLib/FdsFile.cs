@@ -99,32 +99,11 @@ namespace FdsCodeLib
             // Parse file lines into separate commands lines
             ParseCommands();
 
-            // TODO: Parse file for parameters
-            foreach (string line in FileContents)
-            {
-                // Look for HEAD, CHID and TITLE
-                if (line.StartsWith("HEAD"))
-                {
-                    Regex filter = new Regex(@"CHID='[^']*'");
-                    Match match = filter.Match(line);
-                    string val = match.Value.Replace("CHID=", "").Trim('\'');
-
-                    if (match.Success) { ChId = val; }
-
-                    Regex filter2 = new Regex(@"TITLE='[^']*'");
-                    Match match2 = filter2.Match(line);
-                    string val2 = match2.Value.Replace("TITLE=", "").Trim('\'');
-
-                    if (match2.Success) { Title = val2; }
-                }
-
-                // Look for RESTART flag
-                if (line.StartsWith("&MISC") && line.Contains("RESTART=.TRUE."))
-                {
-                    IsRestart = true;
-                }
-
-            }
+            // Get CHID
+            // TODO: Put this into some validation routine
+            FdsCmdHead headCmd = (FdsCmdHead)(Commands.Where(x => x.CommandType == FdsCmdType.HEAD).FirstOrDefault());
+            ChId = headCmd.ChId;
+            Title = headCmd.Title;
 
             // Check file is valid
             if (ChId != "")

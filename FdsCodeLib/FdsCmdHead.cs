@@ -12,7 +12,15 @@ namespace FdsCodeLib
     public class FdsCmdHead : FdsCmd
     {
 
-        // TODO: Add HEAD parameters
+        /// <summary>
+        /// Unique identifier for simulation.
+        /// </summary>
+        public string ChId { get; private set; }
+
+        /// <summary>
+        /// Title of simulation.
+        /// </summary>
+        public string Title { get; private set; }
 
         /// <summary>
         /// Constructor with arguments.
@@ -24,9 +32,8 @@ namespace FdsCodeLib
         public FdsCmdHead(List<string> originalLines, int startLineNum, int endLineNum, int commandNum) :
                base(originalLines, startLineNum, endLineNum, commandNum)
         {
-
-            // TODO: Parse arguments
+            ChId = CommonFunctions.GetStringPar(CommandLine, "CHID");
+            Title = CommonFunctions.GetStringPar(CommandLine, "TITLE");
         }
-
     }
 }

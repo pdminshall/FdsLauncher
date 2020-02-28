@@ -32,8 +32,7 @@ namespace FdsCodeLib
             {
                 case FdsCmdType.HEAD:
                     {
-                        // TODO: Make header object
-
+                        newFdsCmd = new FdsCmdHead(originalLines, startLineNum, endLineNum, commandNum);
                         break;
                     }
                 case FdsCmdType.MISC:
