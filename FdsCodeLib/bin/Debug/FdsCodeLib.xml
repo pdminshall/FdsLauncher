@@ -4,17 +4,46 @@
         <name>FdsCodeLib</name>
     </assembly>
     <members>
+        <member name="T:FdsCodeLib.FdsCmdMisc">
+            <summary>
+            HEAD command class.
+            </summary>
+        </member>
+        <member name="P:FdsCodeLib.FdsCmdMisc.Restart">
+            <summary>
+            Restart simulation from restart point.
+            </summary>
+        </member>
+        <member name="M:FdsCodeLib.FdsCmdMisc.#ctor(System.Collections.Generic.List{System.String},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor with arguments.
+            </summary>
+            <param name="originalLines">Original lines from data file.</param>
+            <param name="startLineNum">Start line number of command.</param>
+            <param name="endLineNum">End line number of command.</param>
+            <param name="commandNum">Sequential number of command.</param>
+        </member>
         <member name="T:FdsCodeLib.CommonFunctions">
             <summary>
             Common functions for parsing commands.
             </summary>
         </member>
-        <member name="M:FdsCodeLib.CommonFunctions.GetStringPar(System.String,System.String)">
+        <member name="M:FdsCodeLib.CommonFunctions.GetStringPar(System.String,System.String,System.String)">
             <summary>
             Get string parameter value.
             </summary>
             <param name="commandString">Full command string.</param>
             <param name="parameterName">Name of parameter to fetch.</param>
+            <param name="defaultVal">Default value if not found.</param>
+            <returns>Value of parameter.</returns>
+        </member>
+        <member name="M:FdsCodeLib.CommonFunctions.GetBoolPar(System.String,System.String,System.Boolean)">
+            <summary>
+            Get boolean parameter value.
+            </summary>
+            <param name="commandString">Full command string.</param>
+            <param name="parameterName">Name of parameter to fetch.</param>
+            <param name="defaultVal">Default value if not found.</param>
             <returns>Value of parameter.</returns>
         </member>
         <member name="T:FdsCodeLib.FdsCmdHead">

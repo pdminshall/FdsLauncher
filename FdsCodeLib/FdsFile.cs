@@ -73,8 +73,9 @@ namespace FdsCodeLib
         {
             // Reset parameters
             FilePath = filePath;
-            IsValidFile = false;
+            IsValidFile = true;
             ChId = "";
+            Title = "";
             IsRestart = false;
 
             // Check for file existance
@@ -99,16 +100,31 @@ namespace FdsCodeLib
             // Parse file lines into separate commands lines
             ParseCommands();
 
-            // Get CHID
             // TODO: Put this into some validation routine
-            FdsCmdHead headCmd = (FdsCmdHead)(Commands.Where(x => x.CommandType == FdsCmdType.HEAD).FirstOrDefault());
-            ChId = headCmd.ChId;
-            Title = headCmd.Title;
-
-            // Check file is valid
-            if (ChId != "")
+            // Get CHID & TITLE
+            try
             {
-                IsValidFile = true;
+                FdsCmdHead headCmd = (FdsCmdHead)(Commands.Where(x => x.CommandType == FdsCmdType.HEAD).FirstOrDefault());
+                ChId = headCmd.ChId;
+                Title = headCmd.Title;
+            }
+            catch (Exception)
+            {
+                ChId = "ERROR";
+                Title = "ERROR";
+                IsValidFile = false;
+            }
+
+            // Get RESTART flag
+            try
+            {
+                FdsCmdMisc miscCmd = (FdsCmdMisc)(Commands.Where(x => x.CommandType == FdsCmdType.MISC).FirstOrDefault());
+                IsRestart = miscCmd.Restart;
+            }
+            catch (Exception)
+            {
+                IsRestart = false;
+                IsValidFile = false;
             }
         }
 

@@ -37,8 +37,7 @@ namespace FdsCodeLib
                     }
                 case FdsCmdType.MISC:
                     {
-                        // TODO: Make misc object
-
+                        newFdsCmd = new FdsCmdMisc(originalLines, startLineNum, endLineNum, commandNum);
                         break;
                     }
 

@@ -9,18 +9,13 @@ namespace FdsCodeLib
     /// <summary>
     /// HEAD command class.
     /// </summary>
-    public class FdsCmdHead : FdsCmd
+    public class FdsCmdMisc : FdsCmd
     {
 
         /// <summary>
-        /// Unique identifier for simulation.
+        /// Restart simulation from restart point.
         /// </summary>
-        public string ChId { get; private set; }
-
-        /// <summary>
-        /// Title of simulation.
-        /// </summary>
-        public string Title { get; private set; }
+        public bool Restart { get; private set; }
 
         /// <summary>
         /// Constructor with arguments.
@@ -29,11 +24,11 @@ namespace FdsCodeLib
         /// <param name="startLineNum">Start line number of command.</param>
         /// <param name="endLineNum">End line number of command.</param>
         /// <param name="commandNum">Sequential number of command.</param>
-        public FdsCmdHead(List<string> originalLines, int startLineNum, int endLineNum, int commandNum) :
+        public FdsCmdMisc(List<string> originalLines, int startLineNum, int endLineNum, int commandNum) :
                base(originalLines, startLineNum, endLineNum, commandNum)
         {
-            ChId = CommonFunctions.GetStringPar(CommandLine, "CHID");
-            Title = CommonFunctions.GetStringPar(CommandLine, "TITLE");
+
+            Restart = CommonFunctions.GetBoolPar(CommandLine, "RESTART", false);
         }
     }
 }

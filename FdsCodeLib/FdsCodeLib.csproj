@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\FdsCmdMisc.cs" />
     <Compile Include="CommonFunctions.cs" />
-    <Compile Include="FdsCmdHead.cs" />
+    <Compile Include="Commands\FdsCmdHead.cs" />
     <Compile Include="FdsCmd.cs" />
     <Compile Include="FdsCmdFactory.cs" />
     <Compile Include="FdsCmdType.cs" />
