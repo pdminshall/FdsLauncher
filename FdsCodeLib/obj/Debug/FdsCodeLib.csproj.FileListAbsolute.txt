@@ -9,6 +9,5 @@ D:\git\FdsLauncher\FdsCodeLib\bin\Debug\FdsCodeLib.xml
 D:\git\FdsLauncher\FdsCodeLib\bin\Debug\FdsCodeLib.dll
 D:\git\FdsLauncher\FdsCodeLib\bin\Debug\FdsCodeLib.pdb
 D:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.csprojAssemblyReference.cache
-D:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.csproj.CoreCompileInputs.cache
 D:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.dll
 D:\git\FdsLauncher\FdsCodeLib\obj\Debug\FdsCodeLib.pdb
