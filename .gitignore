@@ -1,4 +1,4 @@
-/FdsLauncher/obj
-/FdsLauncher/bin
-/FdsLauncher/*.user
-/.vs
+**/obj
+**/bin
+**/*.user
+**/.vs
