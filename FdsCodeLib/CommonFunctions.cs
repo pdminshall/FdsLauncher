@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace FdsCodeLib
 {
@@ -49,6 +44,30 @@ namespace FdsCodeLib
             {
                 if (match.Groups[1].Value == "TRUE") { return true; }
                 if (match.Groups[1].Value == "FALSE") { return false; }
+            }
+
+            return defaultVal;
+        }
+
+        /// <summary>
+        /// Get nullable double parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static double? GetNDoublePar(string commandString, string parameterName, double? defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*)");
+            Match match = filter.Match(commandString);
+
+            if (match.Groups.Count > 1)
+            {
+                double tmpDbl;
+                if (double.TryParse(match.Groups[1].Value, out tmpDbl))
+                {
+                    return tmpDbl;
+                }
             }
 
             return defaultVal;
