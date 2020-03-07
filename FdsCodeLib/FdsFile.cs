@@ -40,19 +40,14 @@ namespace FdsCodeLib
         public List<FdsCmd> Commands { get; private set; }
 
         /// <summary>
-        /// Unique file ID.
+        /// Reference to HEAD section.
         /// </summary>
-        public string ChId { get; private set; }
+        public FdsCmdHead HeadSection { get; private set; }
 
         /// <summary>
-        /// Title of file.
+        /// Reference to MISC section.
         /// </summary>
-        public string Title { get; private set; } = "";
-
-        /// <summary>
-        /// Master restart flag.
-        /// </summary>
-        public bool IsRestart { get; private set; }
+        public FdsCmdMisc MiscSection { get; private set; }
 
         /// <summary>
         /// Constructor using file location.
@@ -74,9 +69,6 @@ namespace FdsCodeLib
             // Reset parameters
             FilePath = filePath;
             IsValidFile = true;
-            ChId = "";
-            Title = "";
-            IsRestart = false;
 
             // Check for file existance
             if (!File.Exists(FilePath)) { return; }
@@ -91,6 +83,7 @@ namespace FdsCodeLib
             }
             catch (Exception e)
             {
+                IsValidFile = false;
                 ErrorMessage = "Problem reading " + FilePath + "/n" + e.Message;
                 return;
             }
@@ -101,30 +94,29 @@ namespace FdsCodeLib
             ParseCommands();
 
             // TODO: Put this into some validation routine
-            // Get CHID & TITLE
+
+            // Get HEAD section
             try
             {
-                FdsCmdHead headCmd = (FdsCmdHead)(Commands.Where(x => x.CommandType == FdsCmdType.HEAD).FirstOrDefault());
-                ChId = headCmd.ChId;
-                Title = headCmd.Title;
+                HeadSection = (FdsCmdHead)(Commands.Where(x => x.CommandType == FdsCmdType.HEAD).FirstOrDefault());
             }
             catch (Exception)
             {
-                ChId = "ERROR";
-                Title = "ERROR";
                 IsValidFile = false;
+                ErrorMessage = "No HEAD section";
+                return;
             }
 
-            // Get RESTART flag
+            // Get MISC section
             try
             {
-                FdsCmdMisc miscCmd = (FdsCmdMisc)(Commands.Where(x => x.CommandType == FdsCmdType.MISC).FirstOrDefault());
-                IsRestart = miscCmd.Restart;
+                MiscSection = (FdsCmdMisc)(Commands.Where(x => x.CommandType == FdsCmdType.MISC).FirstOrDefault());
             }
             catch (Exception)
             {
-                IsRestart = false;
                 IsValidFile = false;
+                ErrorMessage = "No MISC section";
+                return;
             }
         }
 

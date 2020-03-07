@@ -142,7 +142,7 @@ namespace FdsLauncher
 
             // Reload file and check restart flag
             MyFdsFile.LoadFile();
-            LblRestartFlag.Text = "RESTART=." + (MyFdsFile.IsRestart ? "TRUE" : "FALSE") + ".";
+            LblRestartFlag.Text = "RESTART=." + (MyFdsFile.HeadSection.Restart ? "TRUE" : "FALSE") + ".";
 
             // Ask if really want to start
             if (MessageBox.Show("Are you sure?",
@@ -156,7 +156,7 @@ namespace FdsLauncher
                 return;
             }
 
-            if (!MyFdsFile.IsRestart)
+            if (!MyFdsFile.HeadSection.Restart)
             {
                 // No restart. Ask if really want to start
                 if (MessageBox.Show("Data file has no restart flag set. Are you really sure?",
@@ -221,8 +221,8 @@ namespace FdsLauncher
 
             // Load FDS file
             MyFdsFile = new FdsFile(LblFdsDataFile.Text);
-            LblChId.Text = MyFdsFile.ChId + " (" + MyFdsFile.Title + ")";
-            LblRestartFlag.Text = "RESTART=." + (MyFdsFile.IsRestart ? "TRUE" : "FALSE") + ".";
+            LblChId.Text = MyFdsFile.HeadSection.ChId + " (" + MyFdsFile.HeadSection.Title + ")";
+            LblRestartFlag.Text = "RESTART=." + (MyFdsFile.HeadSection.Restart ? "TRUE" : "FALSE") + ".";
 
             RefreshAllButtons();
         }

@@ -72,5 +72,29 @@ namespace FdsCodeLib
 
             return defaultVal;
         }
+
+        /// <summary>
+        /// Get double parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static double GetDoublePar(string commandString, string parameterName, double defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*)");
+            Match match = filter.Match(commandString);
+
+            if (match.Groups.Count > 1)
+            {
+                double tmpDbl;
+                if (double.TryParse(match.Groups[1].Value, out tmpDbl))
+                {
+                    return tmpDbl;
+                }
+            }
+
+            return defaultVal;
+        }
     }
 }
