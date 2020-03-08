@@ -43,6 +43,12 @@ namespace FdsCodeLib
                 return GetIntPar(commandString, parameterName, (int)property);
             }
 
+            // RealTriplet property
+            if (objType == typeof(RealTriplet))
+            {
+                return GetRealTripletPar(commandString, parameterName, (RealTriplet)property);
+            }
+
             return null;
         }
 
@@ -82,30 +88,6 @@ namespace FdsCodeLib
             {
                 if (match.Groups[1].Value == "TRUE") { return true; }
                 if (match.Groups[1].Value == "FALSE") { return false; }
-            }
-
-            return defaultVal;
-        }
-
-        /// <summary>
-        /// Get nullable double parameter value.
-        /// </summary>
-        /// <param name="commandString">Full command string.</param>
-        /// <param name="parameterName">Name of parameter to fetch.</param>
-        /// <param name="defaultVal">Default value if not found.</param>
-        /// <returns>Value of parameter.</returns>
-        public static double? GetNDoublePar(string commandString, string parameterName, double? defaultVal)
-        {
-            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*)");
-            Match match = filter.Match(commandString);
-
-            if (match.Groups.Count > 1)
-            {
-                double tmpDbl;
-                if (double.TryParse(match.Groups[1].Value, out tmpDbl))
-                {
-                    return tmpDbl;
-                }
             }
 
             return defaultVal;
@@ -158,5 +140,35 @@ namespace FdsCodeLib
 
             return defaultVal;
         }
+
+        /// <summary>
+        /// Get RealTriplet parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static RealTriplet GetRealTripletPar(string commandString, string parameterName, RealTriplet defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
+            Match match = filter.Match(commandString);
+
+            if (match.Groups.Count == 4)
+            {
+                double tmpX;
+                double tmpY;
+                double tmpZ;
+
+                if (double.TryParse(match.Groups[1].Value, out tmpX) &&
+                    double.TryParse(match.Groups[2].Value, out tmpY) &&
+                    double.TryParse(match.Groups[3].Value, out tmpZ))
+                {
+                    return new RealTriplet(tmpX, tmpY, tmpZ);
+                }
+            }
+
+            return defaultVal;
+        }
+
     }
 }

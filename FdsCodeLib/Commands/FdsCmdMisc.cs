@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,34 +104,141 @@ namespace FdsCodeLib
         /// </summary>
         public bool CONSTANT_SPECIFIC_HEAT_RATIO = false;
 
-        // TODO: CONSTANT_SPECIFIC_HEAT_RATIO Logical Section 12.1.3 .FALSE.
-        // TODO: DNS Logical Section 6.4.1 .FALSE.
-        // TODO: DRIFT_FLUX Logical Section 13.5 .TRUE.
-        // TODO: DT_HVAC Real Section 9.2 s
-        // TODO: EVACUATION_DRILL Logical Reference[64] .FALSE.
-        // TODO: EVACUATION_MC_MODE Logical Reference[64] .FALSE.
-        // TODO: EVAC_PRESSURE_ITERATIONS Integer Reference[64] 50
-        // TODO: EVAC_TIME_ITERATIONS Integer Reference[64] 50
-        // TODO: FLUX_LIMITER Integer Section 6.4.9 2
-        // TODO: FREEZE_VELOCITY Logical Section 6.4.4 .FALSE.
-        // TODO: GAMMA Real Section 12.1.2 1.4
-        // TODO: GRAVITATIONAL_DEPOSITION Logical Section 13.5 .TRUE.
-        // TODO: GRAVITATIONAL_SETTLING Logical Section 13.5 .TRUE.
-        // TODO: GVEC Real triplet Section 6.4.5 m/s2 0,0,-9.81
-        // TODO: H_F_REFERENCE_TEMPERATURE Real Section 17.10.20 °C 25.
-        // TODO: HVAC_MASS_TRANSPORT Logical Section 9.2.8 .FALSE.
-        // TODO: HVAC_PRES_RELAX Real Section 9.2 0.5
-        // TODO: HUMIDITY Real Section 12.1.1 % 40.
-        // TODO: IBLANK_SMV Logical Section 17.4 .TRUE.
-        // TODO: INITIAL_UNMIXED_FRACTION Real Section 13.1.3 1.0
-        // TODO: MAX_CHEMISTRY_ITERATIONS Integer Section 13.4 1000
-        // TODO: MAX_LEAK_PATHS Integer Section 9.3.2 200
-        // TODO: MAXIMUM_VISIBILITY Real Section 17.10.4 m 30
-        // TODO: MPI_TIMEOUT Real Section 17.10.21 s 10.
-        // TODO: NEAR_WALL_TURBULENCE_MODEL Character Section 6.4.7
-        // TODO: NOISE Logical Section 6.4.1 .TRUE.
-        // TODO: NOISE_VELOCITY Real Section 6.4.1 m/s 0.005
-        // TODO: NO_EVACUATION Logical Reference[64] .FALSE.
+        /// <summary>
+        /// MISC DNS
+        /// </summary>
+        public bool DNS = false;
+
+        /// <summary>
+        /// MISC DRIFT_FLUX
+        /// </summary>
+        public bool DRIFT_FLUX = true;
+
+        /// <summary>
+        /// MISC DT_HVAC
+        /// </summary>
+        public double DT_HVAC = 0.0;
+
+        /// <summary>
+        /// MISC EVACUATION_DRILL
+        /// </summary>
+        public bool EVACUATION_DRILL = false;
+
+        /// <summary>
+        /// MISC EVACUATION_MC_MODE
+        /// </summary>
+        public bool EVACUATION_MC_MODE = false;
+
+        /// <summary>
+        /// MISC EVAC_PRESSURE_ITERATIONS
+        /// </summary>
+        public int EVAC_PRESSURE_ITERATIONS = 50;
+
+        /// <summary>
+        /// MISC EVAC_TIME_ITERATIONS
+        /// </summary>
+        public int EVAC_TIME_ITERATIONS = 50;
+
+        /// <summary>
+        /// MISC FLUX_LIMITER
+        /// </summary>
+        public int FLUX_LIMITER = 2;
+
+        /// <summary>
+        /// MISC FREEZE_VELOCITY
+        /// </summary>
+        public bool FREEZE_VELOCITY = false;
+
+        /// <summary>
+        /// MISC GAMMA
+        /// </summary>
+        public double GAMMA = 1.4;
+
+        /// <summary>
+        /// MISC GRAVITATIONAL_DEPOSITION
+        /// </summary>
+        public bool GRAVITATIONAL_DEPOSITION = true;
+
+        /// <summary>
+        /// MISC GRAVITATIONAL_SETTLING
+        /// </summary>
+        public bool GRAVITATIONAL_SETTLING = true;
+
+        /// <summary>
+        /// MISC GVEC
+        /// </summary>
+        public RealTriplet GVEC = new RealTriplet(0, 0, -9.81);
+
+        /// <summary>
+        /// MISC H_F_REFERENCE_TEMPERATURE
+        /// </summary>
+        public double H_F_REFERENCE_TEMPERATURE = 25;
+
+        /// <summary>
+        /// MISC HVAC_MASS_TRANSPORT
+        /// </summary>
+        public bool HVAC_MASS_TRANSPORT = false;
+
+        /// <summary>
+        /// MISC HVAC_PRES_RELAX
+        /// </summary>
+        public double HVAC_PRES_RELAX = 0.5;
+
+        /// <summary>
+        /// MISC HUMIDITY
+        /// </summary>
+        public double HUMIDITY = 40;
+
+        /// <summary>
+        /// MISC IBLANK_SMV
+        /// </summary>
+        public bool IBLANK_SMV = true;
+
+        /// <summary>
+        /// MISC INITIAL_UNMIXED_FRACTION
+        /// </summary>
+        public double INITIAL_UNMIXED_FRACTION = 1.0;
+
+        /// <summary>
+        /// MISC MAX_CHEMISTRY_ITERATIONS
+        /// </summary>
+        public int MAX_CHEMISTRY_ITERATIONS = 1000;
+
+        /// <summary>
+        /// MISC MAX_LEAK_PATHS
+        /// </summary>
+        public int MAX_LEAK_PATHS = 200;
+
+        /// <summary>
+        /// MISC MAXIMUM_VISIBILITY
+        /// </summary>
+        public double MAXIMUM_VISIBILITY = 30;
+
+        /// <summary>
+        /// MISC MPI_TIMEOUT
+        /// </summary>
+        public double MPI_TIMEOUT = 10;
+
+        /// <summary>
+        /// MISC NEAR_WALL_TURBULENCE_MODEL
+        /// </summary>
+        public string NEAR_WALL_TURBULENCE_MODEL = "";
+
+        /// <summary>
+        /// MISC NOISE
+        /// </summary>
+        public bool NOISE = true;
+
+        /// <summary>
+        /// MISC NOISE_VELOCITY
+        /// </summary>
+        public double NOISE_VELOCITY = 0.005;
+
+        /// <summary>
+        /// MISC NO_EVACUATION
+        /// </summary>
+        public bool NO_EVACUATION = false;
+
         // TODO: OVERWRITE Logical Section 6.4.1 .TRUE.
         // TODO: PARTICLE_CFL Logical Section 6.4.8 .FALSE.
         // TODO: PARTICLE_CFL_MAX Real Section 6.4.8 1.0
