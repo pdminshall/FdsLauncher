@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,15 +16,15 @@ namespace FdsCodeLib
         /// <summary>
         /// Unique identifier for simulation.
         /// </summary>
-        public string ChId { get; private set; }
+        public string CHID = "";
 
         /// <summary>
         /// Title of simulation.
         /// </summary>
-        public string Title { get; private set; }
+        public string TITLE = "";
 
         /// <summary>
-        /// Constructor with arguments.
+        /// Basic constructor.
         /// </summary>
         /// <param name="originalLines">Original lines from data file.</param>
         /// <param name="startLineNum">Start line number of command.</param>
@@ -31,9 +32,6 @@ namespace FdsCodeLib
         /// <param name="commandNum">Sequential number of command.</param>
         public FdsCmdHead(List<string> originalLines, int startLineNum, int endLineNum, int commandNum) :
                base(originalLines, startLineNum, endLineNum, commandNum)
-        {
-            ChId = CommonFunctions.GetStringPar(CommandLine, "CHID", "");
-            Title = CommonFunctions.GetStringPar(CommandLine, "TITLE", "");
-        }
+        { }
     }
 }

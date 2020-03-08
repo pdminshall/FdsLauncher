@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace FdsCodeLib
 {
@@ -7,6 +8,43 @@ namespace FdsCodeLib
     /// </summary>
     public static class CommonFunctions
     {
+
+        /// <summary>
+        /// Generic value getter. This detects the object type and calls the appropriate routine.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="property">Reference to property in command object.</param>
+        public static dynamic GetValue(string commandString, string parameterName, dynamic property)
+        {
+            Type objType = property.GetType();
+
+            // String property
+            if (objType == typeof(string))
+            {
+                return GetStringPar(commandString, parameterName, (string)property);
+            }
+
+            // Boolean property
+            if (objType == typeof(bool))
+            {
+                return GetBoolPar(commandString, parameterName, (bool)property);
+            }
+
+            // Double property
+            if (objType == typeof(double))
+            {
+                return GetDoublePar(commandString, parameterName, (double)property);
+            }
+
+            // Int property
+            if (objType == typeof(int))
+            {
+                return GetIntPar(commandString, parameterName, (int)property);
+            }
+
+            return null;
+        }
 
         /// <summary>
         /// Get string parameter value.
@@ -91,6 +129,30 @@ namespace FdsCodeLib
                 if (double.TryParse(match.Groups[1].Value, out tmpDbl))
                 {
                     return tmpDbl;
+                }
+            }
+
+            return defaultVal;
+        }
+
+        /// <summary>
+        /// Get int parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static int GetIntPar(string commandString, string parameterName, int defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?)");
+            Match match = filter.Match(commandString);
+
+            if (match.Groups.Count > 1)
+            {
+                int tmpInt;
+                if (int.TryParse(match.Groups[1].Value.Trim('.'), out tmpInt))
+                {
+                    return tmpInt;
                 }
             }
 

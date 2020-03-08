@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,6 +63,7 @@ namespace FdsCodeLib
             CommandNum = commandNum;
 
             ParseCommand();
+            LoadData();
         }
 
         /// <summary>
@@ -102,5 +104,19 @@ namespace FdsCodeLib
 
         }
 
+        /// <summary>
+        /// Load all fields with data.
+        /// </summary>
+        public void LoadData()
+        {
+            // Loop over each field and set dynamically
+            foreach (FieldInfo fi in this.GetType().GetFields())
+            {
+                string fieldName = fi.Name;
+                dynamic oldVal = fi.GetValue(this);
+                dynamic newVal = CommonFunctions.GetValue(CommandLine, fieldName, oldVal);
+                fi.SetValue(this, newVal);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,48 +16,93 @@ namespace FdsCodeLib
         /// <summary>
         /// MISC ALLOW_SURFACE_PARTICLES
         /// </summary>
-        public bool AllowSurfaceParticles { get; private set; }
+        public bool ALLOW_SURFACE_PARTICLES = true;
 
         /// <summary>
         /// MISC ALLOW_UNDERSIDE_PARTICLES
         /// </summary>
-        public bool AllowUndersideParticles { get; private set; }
+        public bool ALLOW_UNDERSIDE_PARTICLES = false;
 
         /// <summary>
         /// MISC ASSUMED_GAS_TEMPERATURE
         /// </summary>
-        public double? AssumedGasTemperature { get; private set; }
+        public double ASSUMED_GAS_TEMPERATURE = 0;
 
         /// <summary>
         /// MISC ASSUMED_GAS_TEMPERATURE_RAMP
         /// </summary>
-        public string AssumedGasTemperatureRamp { get; private set; }
+        public string ASSUMED_GAS_TEMPERATURE_RAMP = "";
 
         /// <summary>
         /// MISC BAROCLINIC
         /// </summary>
-        public bool Baroclinic { get; private set; }
+        public bool BAROCLINIC = true;
 
         /// <summary>
         /// MISC BNDF_DEFAULT
         /// </summary>
-        public bool BndfDefault { get; private set; }
+        public bool BNDF_DEFAULT = true;
 
         /// <summary>
         /// MISC C_DEARDORFF
         /// </summary>
-        public double CDeardorff { get; private set; }
+        public double C_DEARDORFF = 0.1;
 
-        // TODO: C_SMAGORINSKY Real 0.20
-        // TODO: C_VREMAN Real 0.07
-        // TODO: C_WALE Real Section 6.4.7 0.60
-        // TODO: CFL_MAX Real Section 6.4.8 1.0
-        // TODO: CFL_MIN Real Section 6.4.8 0.8
-        // TODO: CFL_VELOCITY_NORM Integer Section 6.4.8 0 (LES), 1 (DNS)
-        // TODO: CHECK_HT Logical Section 6.4.8 .FALSE.
-        // TODO: CHECK_VN Logical Section 6.4.8 .FALSE.
-        // TODO: CLIP_MASS_FRACTION Logical Section 6.7 .FALSE.
-        // TODO: CNF_CUTOFF Real Section 15.3.3 0.005
+        /// <summary>
+        /// MISC C_SMAGORINSKY
+        /// </summary>
+        public double C_SMAGORINSKY = 0.2;
+
+        /// <summary>
+        /// MISC C_VREMAN
+        /// </summary>
+        public double C_VREMAN = 0.07;
+
+        /// <summary>
+        /// MISC C_WALE
+        /// </summary>
+        public double C_WALE = 0.6;
+
+        /// <summary>
+        /// MISC CFL_MAX
+        /// </summary>
+        public double CFL_MAX = 1.0;
+
+        /// <summary>
+        /// MISC CFL_MIN
+        /// </summary>
+        public double CFL_MIN = 0.8;
+
+        /// <summary>
+        /// MISC CFL_VELOCITY_NORM
+        /// </summary>
+        public int CFL_VELOCITY_NORM = 0;
+
+        /// <summary>
+        /// MISC CHECK_HT
+        /// </summary>
+        public bool CHECK_HT = false;
+
+        /// <summary>
+        /// MISC CHECK_VN
+        /// </summary>
+        public bool CHECK_VN = false;
+
+        /// <summary>
+        /// MISC CLIP_MASS_FRACTION
+        /// </summary>
+        public bool CLIP_MASS_FRACTION = false;
+
+        /// <summary>
+        /// MISC CNF_CUTOFF
+        /// </summary>
+        public double CNF_CUTOFF = 0.005;
+
+        /// <summary>
+        /// MISC CONSTANT_SPECIFIC_HEAT_RATIO
+        /// </summary>
+        public bool CONSTANT_SPECIFIC_HEAT_RATIO = false;
+
         // TODO: CONSTANT_SPECIFIC_HEAT_RATIO Logical Section 12.1.3 .FALSE.
         // TODO: DNS Logical Section 6.4.1 .FALSE.
         // TODO: DRIFT_FLUX Logical Section 13.5 .TRUE.
@@ -96,7 +142,12 @@ namespace FdsCodeLib
         // TODO: RAMP_GX Character Section 6.4.5
         // TODO: RAMP_GY Character Section 6.4.5
         // TODO: RAMP_GZ Character Section 6.4.5
-        // TODO: RESTART Logical Section 6.4.2 .FALSE.
+
+        /// <summary>
+        /// MISC RESTART
+        /// </summary>
+        public bool RESTART = false;
+
         // TODO: RESTART_CHID Character Section 6.4.2 CHID
         // TODO: RICHARDSON_ERROR_TOLERANCE Real Section 13 1.0 E-3
         // TODO: SC Real Section 6.4.7 0.5
@@ -118,7 +169,7 @@ namespace FdsCodeLib
         // TODO: Y_O2_INFTY Real Section 13.1.1 kg/kg
 
         /// <summary>
-        /// Constructor with arguments.
+        /// Basic constructor.
         /// </summary>
         /// <param name="originalLines">Original lines from data file.</param>
         /// <param name="startLineNum">Start line number of command.</param>
@@ -126,14 +177,6 @@ namespace FdsCodeLib
         /// <param name="commandNum">Sequential number of command.</param>
         public FdsCmdMisc(List<string> originalLines, int startLineNum, int endLineNum, int commandNum) :
                base(originalLines, startLineNum, endLineNum, commandNum)
-        {
-            AllowSurfaceParticles = CommonFunctions.GetBoolPar(CommandLine, "ALLOW_SURFACE_PARTICLES", true);
-            AllowUndersideParticles = CommonFunctions.GetBoolPar(CommandLine, "ALLOW_UNDERSIDE_PARTICLES", false);
-            AssumedGasTemperature = CommonFunctions.GetNDoublePar(CommandLine, "ASSUMED_GAS_TEMPERATURE", null);
-            AssumedGasTemperatureRamp = CommonFunctions.GetStringPar(CommandLine, "ASSUMED_GAS_TEMPERATURE_RAMP", "");
-            Baroclinic = CommonFunctions.GetBoolPar(CommandLine, "BAROCLINIC", true);
-            BndfDefault = CommonFunctions.GetBoolPar(CommandLine, "BNDF_DEFAULT", true);
-            CDeardorff = CommonFunctions.GetDoublePar(CommandLine, "C_DEARDORFF", 0.1);
-        }
+        { }
     }
 }

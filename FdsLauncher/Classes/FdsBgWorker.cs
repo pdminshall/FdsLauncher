@@ -30,7 +30,7 @@ namespace FdsLauncher
             List<object> fdsArgs = (List<object>)e.Argument;
             string fdsExeFile = (string)fdsArgs[0];
             FdsFile fdsFile = (FdsFile)fdsArgs[1];
-            string stopFile = Path.GetDirectoryName(fdsFile.FilePath) + @"\" + fdsFile.HeadSection.ChId + ".stop";
+            string stopFile = Path.GetDirectoryName(fdsFile.FilePath) + @"\" + fdsFile.HeadSection.CHID + ".stop";
 
             // Create process object
             Process fdsProcess = new Process();
