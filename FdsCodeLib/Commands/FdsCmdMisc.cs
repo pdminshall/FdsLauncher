@@ -239,17 +239,60 @@ namespace FdsCodeLib
         /// </summary>
         public bool NO_EVACUATION = false;
 
-        // TODO: OVERWRITE Logical Section 6.4.1 .TRUE.
-        // TODO: PARTICLE_CFL Logical Section 6.4.8 .FALSE.
-        // TODO: PARTICLE_CFL_MAX Real Section 6.4.8 1.0
-        // TODO: POROUS_FLOOR Logical Section 16.3.1 .TRUE.
-        // TODO: PR Real Section 6.4.7 0.5
-        // TODO: PROCESS_ALL_MESHES Logical Section 7.3.2 .FALSE.
-        // TODO: PROJECTION Logical Formal projection.FALSE.
-        // TODO: P_INF Real Section 6.4.1 Pa 101325
-        // TODO: RAMP_GX Character Section 6.4.5
-        // TODO: RAMP_GY Character Section 6.4.5
-        // TODO: RAMP_GZ Character Section 6.4.5
+        /// <summary>
+        /// MISC OVERWRITE
+        /// </summary>
+        public bool OVERWRITE = true;
+
+        /// <summary>
+        /// MISC PARTICLE_CFL
+        /// </summary>
+        public bool PARTICLE_CFL = false;
+
+        /// <summary>
+        /// MISC PARTICLE_CFL_MAX
+        /// </summary>
+        public double PARTICLE_CFL_MAX = 1.0;
+
+        /// <summary>
+        /// MISC POROUS_FLOOR
+        /// </summary>
+        public bool POROUS_FLOOR = true;
+
+        /// <summary>
+        /// MISC PR
+        /// </summary>
+        public double PR = 0.5;
+
+        /// <summary>
+        /// MISC PROCESS_ALL_MESHES
+        /// </summary>
+        public bool PROCESS_ALL_MESHES = false;
+
+        /// <summary>
+        /// MISC PROJECTION
+        /// </summary>
+        public bool PROJECTION = false;
+
+        /// <summary>
+        /// MISC PR
+        /// </summary>
+        public double P_INF = 101325;
+
+        /// <summary>
+        /// MISC RAMP_GX
+        /// </summary>
+        public string RAMP_GX = "";
+
+        /// <summary>
+        /// MISC RAMP_GY
+        /// </summary>
+        public string RAMP_GY = "";
+
+        /// <summary>
+        /// MISC RAMP_GZ
+        /// </summary>
+        public string RAMP_GZ = "";
 
         /// <summary>
         /// MISC RESTART
