@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FdsCodeLib
 {
@@ -47,6 +44,59 @@ namespace FdsCodeLib
         /// Command sequence number in original file.
         /// </summary>
         public int CommandNum { get; private set; } = 0;
+
+        /// <summary>
+        /// Validity marker.
+        /// </summary>
+        public bool IsValid { get; set; } = true;
+
+        /// <summary>
+        /// Error message.
+        /// </summary>
+        public string ErrorMessage { get; set; } = "";
+
+        /// <summary>
+        /// Show command with line numbers.
+        /// </summary>
+        public string DebugOutput
+        {
+            get
+            {
+                string output = "";
+                if (StartLineNum == EndLineNum)
+                {
+                    output += "---- Line " + StartLineNum + "----\n";
+
+                }
+                else
+                {
+                    output += "---- Lines " + StartLineNum + " - " + EndLineNum + " ----\n";
+                }
+
+                foreach (string line in OriginalLines)
+                {
+                    output += line + "\n";
+                }
+                output += "------------------------\n";
+                return output;
+            }
+        }
+
+        /// <summary>
+        /// Show error and lines, if invalid.
+        /// </summary>
+        public string ErrorOutput
+        {
+            get
+            {
+                if (IsValid) { return ""; }
+
+                string output = "------- ERROR --------\n";
+                output += ErrorMessage + "\n";
+                output += DebugOutput + "\n";
+                return output;
+            }
+        }
 
         /// <summary>
         /// Constructor with arguments to set command line.

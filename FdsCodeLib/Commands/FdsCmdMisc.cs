@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FdsCodeLib
 {
     /// <summary>
-    /// HEAD command class.
+    /// MISC command class.
     /// </summary>
     public class FdsCmdMisc : FdsCmd
     {

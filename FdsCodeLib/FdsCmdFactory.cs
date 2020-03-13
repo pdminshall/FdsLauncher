@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FdsCodeLib
 {
@@ -38,6 +34,11 @@ namespace FdsCodeLib
                 case FdsCmdType.MISC:
                     {
                         newFdsCmd = new FdsCmdMisc(originalLines, startLineNum, endLineNum, commandNum);
+                        break;
+                    }
+                case FdsCmdType.MESH:
+                    {
+                        newFdsCmd = new FdsCmdMesh(originalLines, startLineNum, endLineNum, commandNum);
                         break;
                     }
 

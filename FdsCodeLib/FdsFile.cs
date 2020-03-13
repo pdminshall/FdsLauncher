@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace FdsCodeLib
 {
@@ -59,6 +56,22 @@ namespace FdsCodeLib
         /// Method to load FDS data file into memory.
         /// </summary>
         public void LoadFile() { LoadFile(FilePath); }
+
+        /// <summary>
+        /// Dump out all errors.
+        /// </summary>
+        public string ErrorOutput
+        {
+            get
+            {
+                string output = "";
+                foreach (FdsCmd cmd in Commands)
+                {
+                    output += cmd.ErrorOutput;
+                }
+                return output;
+            }
+        }
 
         /// <summary>
         /// Method to load file using named file path.

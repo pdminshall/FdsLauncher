@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
+﻿using FdsCodeLib;
 using FdsLauncher.Properties;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
-using FdsCodeLib;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace FdsLauncher
 {
@@ -227,7 +224,14 @@ namespace FdsLauncher
             // Load FDS file
             MyFdsFile = new FdsFile(LblFdsDataFile.Text);
             LblChId.Text = MyFdsFile.HeadSection.CHID + " (" + MyFdsFile.HeadSection.TITLE + ")";
-            LblRestartFlag.Text = "RESTART=." + (MyFdsFile.MiscSection.RESTART ? "TRUE" : "FALSE") + ".";
+
+            // Get restart flag
+            bool restart = false;
+            if (MyFdsFile.MiscSection != null && MyFdsFile.MiscSection.RESTART)
+            {
+                restart = true;
+            }
+            LblRestartFlag.Text = "RESTART=." + (restart ? "TRUE" : "FALSE") + ".";
 
             AddConsoleLine("Done");
             RefreshConsole();

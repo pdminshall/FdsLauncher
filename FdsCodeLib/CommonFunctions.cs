@@ -49,6 +49,20 @@ namespace FdsCodeLib
                 return GetRealTripletPar(commandString, parameterName, (RealTriplet)property);
             }
 
+            // RealSextuplet property
+            if (objType == typeof(RealSextuplet))
+            {
+                return GetRealSextupletPar(commandString, parameterName, (RealSextuplet)property);
+            }
+
+            // IntTriplet property
+            if (objType == typeof(IntTriplet))
+            {
+                return GetIntTripletPar(commandString, parameterName, (IntTriplet)property);
+            }
+
+            // TODO: String array
+
             return null;
         }
 
@@ -164,6 +178,70 @@ namespace FdsCodeLib
                     double.TryParse(match.Groups[3].Value, out tmpZ))
                 {
                     return new RealTriplet(tmpX, tmpY, tmpZ);
+                }
+            }
+
+            return defaultVal;
+        }
+
+        /// <summary>
+        /// Get RealSextuplet parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static RealSextuplet GetRealSextupletPar(string commandString, string parameterName, RealSextuplet defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
+            Match match = filter.Match(commandString);
+
+            if (match.Groups.Count == 7)
+            {
+                double tmpXMin;
+                double tmpXMax;
+                double tmpYMin;
+                double tmpYMax;
+                double tmpZMin;
+                double tmpZMax;
+
+                if (double.TryParse(match.Groups[1].Value, out tmpXMin) &&
+                    double.TryParse(match.Groups[2].Value, out tmpXMax) &&
+                    double.TryParse(match.Groups[3].Value, out tmpYMin) &&
+                    double.TryParse(match.Groups[4].Value, out tmpYMax) &&
+                    double.TryParse(match.Groups[5].Value, out tmpZMin) &&
+                    double.TryParse(match.Groups[6].Value, out tmpZMax))
+                {
+                    return new RealSextuplet(tmpXMin, tmpXMax, tmpYMin, tmpYMax, tmpZMin, tmpZMax);
+                }
+            }
+
+            return defaultVal;
+        }
+
+        /// <summary>
+        /// Get IntTriplet parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static IntTriplet GetIntTripletPar(string commandString, string parameterName, IntTriplet defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+) *, *(-?[0-9]+) *, *(-?[0-9]+)");
+            Match match = filter.Match(commandString);
+
+            if (match.Groups.Count == 4)
+            {
+                int tmpX;
+                int tmpY;
+                int tmpZ;
+
+                if (int.TryParse(match.Groups[1].Value, out tmpX) &&
+                    int.TryParse(match.Groups[2].Value, out tmpY) &&
+                    int.TryParse(match.Groups[3].Value, out tmpZ))
+                {
+                    return new IntTriplet(tmpX, tmpY, tmpZ);
                 }
             }
 
