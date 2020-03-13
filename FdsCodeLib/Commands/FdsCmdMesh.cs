@@ -66,7 +66,7 @@ namespace FdsCodeLib
         /// <summary>
         /// MESH PERIODIC_MESH_IDS
         /// </summary>
-        public string[] PERIODIC_MESH_IDS = new string[] { "", "", "" };
+        public Dictionary<string, string> PERIODIC_MESH_IDS = new Dictionary<string, string>();
 
         /// <summary>
         /// MESH RGB

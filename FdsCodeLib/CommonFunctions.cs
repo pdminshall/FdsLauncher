@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace FdsCodeLib
@@ -61,7 +62,13 @@ namespace FdsCodeLib
                 return GetIntTripletPar(commandString, parameterName, (IntTriplet)property);
             }
 
-            // TODO: String array
+            // Dictionary<string, string> property
+            if (objType == typeof(Dictionary<string, string>))
+            {
+                return GetStringArrayPar(commandString, parameterName, (Dictionary<string, string>)property);
+            }
+
+            // TODO: List<string>
 
             return null;
         }
@@ -87,6 +94,30 @@ namespace FdsCodeLib
         }
 
         /// <summary>
+        /// Get string array parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static Dictionary<string, string> GetStringArrayPar(string commandString, string parameterName, Dictionary<string, string> defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *\( *([^\)]+) *\) *= *'([^']*)'");
+
+            Match match = filter.Match(commandString);
+            Dictionary<string, string> retVal = new Dictionary<string, string>();
+            while (match.Success)
+            {
+                string key = match.Groups[1].Value;
+                string value = match.Groups[2].Value;
+                if (!retVal.ContainsKey(key)) { retVal.Add(key, value); }
+                match = match.NextMatch();
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Get boolean parameter value.
         /// </summary>
         /// <param name="commandString">Full command string.</param>
@@ -98,7 +129,7 @@ namespace FdsCodeLib
             Regex filter = new Regex(parameterName + @" *= *\.([^\.]*)\.");
             Match match = filter.Match(commandString);
 
-            if (match.Groups.Count > 1)
+            if (match.Success)
             {
                 if (match.Groups[1].Value == "TRUE") { return true; }
                 if (match.Groups[1].Value == "FALSE") { return false; }
@@ -119,7 +150,7 @@ namespace FdsCodeLib
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*)");
             Match match = filter.Match(commandString);
 
-            if (match.Groups.Count > 1)
+            if (match.Success)
             {
                 double tmpDbl;
                 if (double.TryParse(match.Groups[1].Value, out tmpDbl))
@@ -143,7 +174,7 @@ namespace FdsCodeLib
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?)");
             Match match = filter.Match(commandString);
 
-            if (match.Groups.Count > 1)
+            if (match.Success)
             {
                 int tmpInt;
                 if (int.TryParse(match.Groups[1].Value.Trim('.'), out tmpInt))
@@ -167,7 +198,7 @@ namespace FdsCodeLib
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
             Match match = filter.Match(commandString);
 
-            if (match.Groups.Count == 4)
+            if (match.Success)
             {
                 double tmpX;
                 double tmpY;
@@ -196,7 +227,7 @@ namespace FdsCodeLib
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
             Match match = filter.Match(commandString);
 
-            if (match.Groups.Count == 7)
+            if (match.Success)
             {
                 double tmpXMin;
                 double tmpXMax;
@@ -231,7 +262,7 @@ namespace FdsCodeLib
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+) *, *(-?[0-9]+) *, *(-?[0-9]+)");
             Match match = filter.Match(commandString);
 
-            if (match.Groups.Count == 4)
+            if (match.Success)
             {
                 int tmpX;
                 int tmpY;
