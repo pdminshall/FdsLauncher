@@ -299,25 +299,100 @@ namespace FdsCodeLib
         /// </summary>
         public bool RESTART = false;
 
-        // TODO: RESTART_CHID Character Section 6.4.2 CHID
-        // TODO: RICHARDSON_ERROR_TOLERANCE Real Section 13 1.0 E-3
-        // TODO: SC Real Section 6.4.7 0.5
-        // TODO: SHARED_FILE_SYSTEM Logical Section 6.3.3 .TRUE.
-        // TODO: SMOKE_ALBEDO Real Reference[2] 0.3
-        // TODO: SOLID_PHASE_ONLY Logical Section 8.7 .FALSE.
-        // TODO: SUPPRESSION Logical Section 13.1.4 .TRUE.
-        // TODO: TEXTURE_ORIGIN(3) Real Triplet Section 7.4.2 m(0.,0.,0.)
-        // TODO: THERMOPHORETIC_DEPOSITION Logical Section 13.5 .TRUE.
-        // TODO: THICKEN_OBSTRUCTIONS Logical Section 7.2.1 .FALSE.
-        // TODO: TMPA Real Section 6.4.1 °C 20.
-        // TODO: TURBULENCE_MODEL Character Section 6.4.7 ’DEARDORFF’
-        // TODO: TURBULENT_DEPOSITION Logical Section 13.5 .TRUE.
-        // TODO: VERBOSE Logical Section 6.3.3
-        // TODO: VISIBILITY_FACTOR Real Section 17.10.4 3
-        // TODO: VN_MAX Real Section 6.4.8 1.0
-        // TODO: VN_MIN Real Section 6.4.8 0.8
-        // TODO: Y_CO2_INFTY Real Section 13.1.1 kg/kg
-        // TODO: Y_O2_INFTY Real Section 13.1.1 kg/kg
+        /// <summary>
+        /// MISC RESTART_CHID
+        /// </summary>
+        public string RESTART_CHID = "";
+
+        /// <summary>
+        /// MISC RICHARDSON_ERROR_TOLERANCE
+        /// </summary>
+        public double RICHARDSON_ERROR_TOLERANCE = 1.0E-3;
+
+        /// <summary>
+        /// MISC SC
+        /// </summary>
+        public double SC = 0.5;
+
+        /// <summary>
+        /// MISC SHARED_FILE_SYSTEM
+        /// </summary>
+        public bool SHARED_FILE_SYSTEM = true;
+
+        /// <summary>
+        /// MISC SMOKE_ALBEDO
+        /// </summary>
+        public double SMOKE_ALBEDO = 0.3;
+
+        /// <summary>
+        /// MISC SOLID_PHASE_ONLY
+        /// </summary>
+        public bool SOLID_PHASE_ONLY = false;
+
+        /// <summary>
+        /// MISC SUPPRESSION
+        /// </summary>
+        public bool SUPPRESSION = true;
+
+        /// <summary>
+        /// MISC TEXTURE_ORIGIN
+        /// </summary>
+        public RealTriplet TEXTURE_ORIGIN = new RealTriplet(0, 0, 0);
+
+        /// <summary>
+        /// MISC THERMOPHORETIC_DEPOSITION
+        /// </summary>
+        public bool THERMOPHORETIC_DEPOSITION = true;
+
+        /// <summary>
+        /// MISC THICKEN_OBSTRUCTIONS
+        /// </summary>
+        public bool THICKEN_OBSTRUCTIONS = false;
+
+        /// <summary>
+        /// MISC TMPA
+        /// </summary>
+        public double TMPA = 20;
+
+        /// <summary>
+        /// MISC TURBULENCE_MODEL
+        /// </summary>
+        public string TURBULENCE_MODEL = "DEARDORFF";
+
+        /// <summary>
+        /// MISC TURBULENCE_DEPOSITION
+        /// </summary>
+        public bool TURBULENCE_DEPOSITION = true;
+
+        /// <summary>
+        /// MISC VERBOSE
+        /// </summary>
+        public bool VERBOSE = false;
+
+        /// <summary>
+        /// MISC VISIBILITY_FACTOR
+        /// </summary>
+        public double VISIBILITY_FACTOR = 3;
+
+        /// <summary>
+        /// MISC VN_MAX
+        /// </summary>
+        public double VN_MAX = 1.0;
+
+        /// <summary>
+        /// MISC VN_MIN
+        /// </summary>
+        public double VN_MIN = 0.8;
+
+        /// <summary>
+        /// MISC Y_CO2_INFTY
+        /// </summary>
+        public double Y_CO2_INFTY = 0;
+
+        /// <summary>
+        /// MISC Y_O2_INFTY
+        /// </summary>
+        public double Y_O2_INFTY = 0;
 
         /// <summary>
         /// Basic constructor.
