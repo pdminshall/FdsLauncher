@@ -12,31 +12,31 @@ namespace FdsCodeLib
     public struct RealTriplet
     {
         /// <summary>
-        /// X coord.
+        /// V1 value.
         /// </summary>
-        public double X;
+        public double V1;
 
         /// <summary>
-        /// Y coord.
+        /// V2 value.
         /// </summary>
-        public double Y;
+        public double V2;
 
         /// <summary>
-        /// Z coord.
+        /// V3 value.
         /// </summary>
-        public double Z;
+        public double V3;
 
         /// <summary>
         /// Constructor with parameters.
         /// </summary>
-        /// <param name="x">X coord.</param>
-        /// <param name="y">Y coord.</param>
-        /// <param name="z">Z coord.</param>
-        public RealTriplet(double x, double y, double z)
+        /// <param name="v1">V1 value.</param>
+        /// <param name="v2">V2 value.</param>
+        /// <param name="v3">V3 value.</param>
+        public RealTriplet(double v1, double v2, double v3)
         {
-            X = x;
-            Y = y;
-            Z = z;
+            V1 = v1;
+            V2 = v2;
+            V3 = v3;
         }
     }
 }

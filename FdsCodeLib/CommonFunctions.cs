@@ -38,10 +38,44 @@ namespace FdsCodeLib
                 return GetDoublePar(commandString, parameterName, (double)property);
             }
 
+            // NDouble property
+            if (objType == typeof(NDouble))
+            {
+                // Call double method with magic number for default
+                double newVar = GetDoublePar(commandString, parameterName, -999999999);
+
+                if (newVar == -999999999)
+                {
+                    // Send default parameter
+                    return property;
+                }
+                else
+                {
+                    return new NDouble(true, newVar);
+                }
+            }
+
             // Int property
             if (objType == typeof(int))
             {
                 return GetIntPar(commandString, parameterName, (int)property);
+            }
+
+            // NInt property
+            if (objType == typeof(NInt))
+            {
+                // Call int method with magic number for default
+                int newVar = GetIntPar(commandString, parameterName, -999999999);
+
+                if (newVar == -999999999)
+                {
+                    // Send default parameter
+                    return property;
+                }
+                else
+                {
+                    return new NInt(true, newVar);
+                }
             }
 
             // RealTriplet property

@@ -10,8 +10,16 @@
         /// </summary>
         NONE,
 
+        /// <summary>
+        /// Boundary File Parameters.
+        /// </summary>
         BNDF,
+
+        /// <summary>
+        /// Clipping parameters.
+        /// </summary>
         CLIP,
+
         CSVF,
         CTRL,
         DEVC,

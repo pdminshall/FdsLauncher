@@ -26,6 +26,16 @@ namespace FdsCodeLib
             // Make sub class object for each command type
             switch (newFdsCmd.CommandType)
             {
+                case FdsCmdType.BNDF:
+                    {
+                        newFdsCmd = new FdsCmdBndf(originalLines, startLineNum, endLineNum, commandNum);
+                        break;
+                    }
+                case FdsCmdType.CLIP:
+                    {
+                        newFdsCmd = new FdsCmdClip(originalLines, startLineNum, endLineNum, commandNum);
+                        break;
+                    }
                 case FdsCmdType.HEAD:
                     {
                         newFdsCmd = new FdsCmdHead(originalLines, startLineNum, endLineNum, commandNum);

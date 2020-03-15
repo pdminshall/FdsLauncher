@@ -51,12 +51,12 @@ namespace FdsCodeLib
         /// <summary>
         /// MESH MPI_PROCESS
         /// </summary>
-        public int MPI_PROCESS = -1;
+        public NInt MPI_PROCESS = new NInt(false, 0);
 
         /// <summary>
         /// MESH N_THREADS
         /// </summary>
-        public int N_THREADS = 0;
+        public NInt N_THREADS = new NInt(false, 0);
 
         /// <summary>
         /// MESH MULTI_ID

@@ -6,52 +6,52 @@
     public struct RealSextuplet
     {
         /// <summary>
-        /// X min coord.
+        /// V1 value.
         /// </summary>
-        public double XMin;
+        public double V1;
 
         /// <summary>
-        /// X max coord.
+        /// V2 value.
         /// </summary>
-        public double XMax;
+        public double V2;
 
         /// <summary>
-        /// Y min coord.
+        /// V3 value.
         /// </summary>
-        public double YMin;
+        public double V3;
 
         /// <summary>
-        /// Y max coord.
+        /// V4 value.
         /// </summary>
-        public double YMax;
+        public double V4;
 
         /// <summary>
-        /// Z min coord.
+        /// V5 value.
         /// </summary>
-        public double ZMin;
+        public double V5;
 
         /// <summary>
-        /// Z max coord.
+        /// V6 value.
         /// </summary>
-        public double ZMax;
+        public double V6;
 
         /// <summary>
         /// Constructor with parameters.
         /// </summary>
-        /// <param name="xMin">X min coord.</param>
-        /// <param name="xMax">X max coord.</param>
-        /// <param name="yMin">Y min coord.</param>
-        /// <param name="yMax">Y max coord.</param>
-        /// <param name="zMin">Z min coord.</param>
-        /// <param name="zMax">Z max coord.</param>
-        public RealSextuplet(double xMin, double xMax, double yMin, double yMax, double zMin, double zMax)
+        /// <param name="v1">V1 value.</param>
+        /// <param name="v2">V2 value.</param>
+        /// <param name="v3">V3 value.</param>
+        /// <param name="v4">V4 value.</param>
+        /// <param name="v5">V5 value.</param>
+        /// <param name="v6">V6 value.</param>
+        public RealSextuplet(double v1, double v2, double v3, double v4, double v5, double v6)
         {
-            XMin = xMin;
-            XMax = xMax;
-            YMin = yMin;
-            YMax = yMax;
-            ZMin = zMin;
-            ZMax = zMax;
+            V1 = v1;
+            V2 = v2;
+            V3 = v3;
+            V4 = v4;
+            V5 = v5;
+            V6 = v6;
         }
     }
 }
