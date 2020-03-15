@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\FdsCmdCsvf.cs" />
     <Compile Include="Commands\FdsCmdClip.cs" />
     <Compile Include="Commands\FdsCmdBndf.cs" />
     <Compile Include="Commands\FdsCmdMesh.cs" />

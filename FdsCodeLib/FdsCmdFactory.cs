@@ -36,6 +36,11 @@ namespace FdsCodeLib
                         newFdsCmd = new FdsCmdClip(originalLines, startLineNum, endLineNum, commandNum);
                         break;
                     }
+                case FdsCmdType.CSVF:
+                    {
+                        newFdsCmd = new FdsCmdCsvf(originalLines, startLineNum, endLineNum, commandNum);
+                        break;
+                    }
                 case FdsCmdType.HEAD:
                     {
                         newFdsCmd = new FdsCmdHead(originalLines, startLineNum, endLineNum, commandNum);

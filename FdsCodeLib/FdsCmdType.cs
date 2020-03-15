@@ -20,7 +20,11 @@
         /// </summary>
         CLIP,
 
+        /// <summary>
+        /// CSV File parameter.
+        /// </summary>
         CSVF,
+
         CTRL,
         DEVC,
         DUMP,

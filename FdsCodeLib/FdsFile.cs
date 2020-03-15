@@ -106,12 +106,10 @@ namespace FdsCodeLib
             // Parse file lines into separate commands lines
             ParseCommands();
 
-            // TODO: Put this into some validation routine
-
             // Get HEAD section
             try
             {
-                HeadSection = (FdsCmdHead)(Commands.Where(x => x.CommandType == FdsCmdType.HEAD).FirstOrDefault());
+                HeadSection = (FdsCmdHead)(Commands.Where(x => x.CommandType == FdsCmdType.HEAD).First());
             }
             catch (Exception)
             {
@@ -125,12 +123,19 @@ namespace FdsCodeLib
             {
                 MiscSection = (FdsCmdMisc)(Commands.Where(x => x.CommandType == FdsCmdType.MISC).FirstOrDefault());
             }
-            catch (Exception)
+            catch (Exception) { }
+
+            // TODO: Run validation routines in separate class
+            // Multiple misc sections
+            if (Commands.Where(x => x.CommandType == FdsCmdType.MISC).Count() > 1)
             {
-                IsValidFile = false;
-                ErrorMessage = "No MISC section";
-                return;
+                foreach (FdsCmd cmd in Commands.Where(x => x.CommandType == FdsCmdType.MISC))
+                {
+                    cmd.ErrorMessage = "Multiple MISC sections";
+                    cmd.IsValid = false;
+                }
             }
+
         }
 
         /// <summary>

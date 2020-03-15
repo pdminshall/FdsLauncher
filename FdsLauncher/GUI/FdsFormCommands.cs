@@ -216,6 +216,7 @@ namespace FdsLauncher
                 LblFdsDataFile.Text = fileDialog.FileName;
             }
 
+            ClearConsole();
             AddConsoleLine("---------------------------------------");
             AddConsoleLine("Loading: " + LblFdsDataFile.Text + " ..");
             RefreshConsole();
@@ -223,6 +224,14 @@ namespace FdsLauncher
 
             // Load FDS file
             MyFdsFile = new FdsFile(LblFdsDataFile.Text);
+
+            // Detect major errors
+            if (!MyFdsFile.IsValidFile)
+            {
+                AddConsoleLine("ERROR! " + MyFdsFile.ErrorMessage);
+                return;
+            }
+
             LblChId.Text = MyFdsFile.HeadSection.CHID + " (" + MyFdsFile.HeadSection.TITLE + ")";
 
             // Get restart flag
@@ -232,6 +241,10 @@ namespace FdsLauncher
                 restart = true;
             }
             LblRestartFlag.Text = "RESTART=." + (restart ? "TRUE" : "FALSE") + ".";
+
+            // Output any errors
+            AddConsoleLine(MyFdsFile.ErrorOutput);
+
 
             AddConsoleLine("Done");
             RefreshConsole();

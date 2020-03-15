@@ -77,7 +77,6 @@ namespace FdsCodeLib
                 {
                     output += line + "\n";
                 }
-                output += "------------------------\n";
                 return output;
             }
         }
@@ -91,9 +90,11 @@ namespace FdsCodeLib
             {
                 if (IsValid) { return ""; }
 
-                string output = "------- ERROR --------\n";
+                string output = "";
+                output = "-------- ERROR -----------------------\n";
                 output += ErrorMessage + "\n";
-                output += DebugOutput + "\n";
+                output += DebugOutput;
+                output += "--------------------------------------\n\n";
                 return output;
             }
         }
