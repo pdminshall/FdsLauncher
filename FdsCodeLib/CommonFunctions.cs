@@ -99,11 +99,25 @@ namespace FdsCodeLib
             // Dictionary<string, string> property
             if (objType == typeof(Dictionary<string, string>))
             {
-                return GetStringArrayPar(commandString, parameterName, (Dictionary<string, string>)property);
+                return GetStringDictPar(commandString, parameterName, (Dictionary<string, string>)property);
             }
 
-            // TODO: List<string>
+            // Function type enum
+            if (objType == typeof(FunctionTypeEnum))
+            {
+                string strVal = GetStringPar(commandString, parameterName, property.ToString());
+                FunctionTypeEnum newVal = property;
 
+                try
+                {
+                    newVal = (FunctionTypeEnum)Enum.Parse(typeof(FunctionTypeEnum), strVal);
+                }
+                catch (Exception) { }
+
+                return newVal;
+            }
+
+            // TODO: String List (CSV)
             return null;
         }
 
@@ -128,13 +142,13 @@ namespace FdsCodeLib
         }
 
         /// <summary>
-        /// Get string array parameter value.
+        /// Get string dictionary parameter value.
         /// </summary>
         /// <param name="commandString">Full command string.</param>
         /// <param name="parameterName">Name of parameter to fetch.</param>
         /// <param name="defaultVal">Default value if not found.</param>
         /// <returns>Value of parameter.</returns>
-        public static Dictionary<string, string> GetStringArrayPar(string commandString, string parameterName, Dictionary<string, string> defaultVal)
+        public static Dictionary<string, string> GetStringDictPar(string commandString, string parameterName, Dictionary<string, string> defaultVal)
         {
             Regex filter = new Regex(parameterName + @" *\( *([^\)]+) *\) *= *'([^']*)'");
 
@@ -313,5 +327,6 @@ namespace FdsCodeLib
             return defaultVal;
         }
 
+        // TODO: String List (CSV)
     }
 }

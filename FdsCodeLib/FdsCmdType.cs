@@ -25,7 +25,11 @@
         /// </summary>
         CSVF,
 
+        /// <summary>
+        /// Control object.
+        /// </summary>
         CTRL,
+
         DEVC,
         DUMP,
 

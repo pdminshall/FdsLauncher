@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\FdsCmdCtrl.cs" />
     <Compile Include="Commands\FdsCmdCsvf.cs" />
     <Compile Include="Commands\FdsCmdClip.cs" />
     <Compile Include="Commands\FdsCmdBndf.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="FdsCmdType.cs" />
     <Compile Include="FdsFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecialTypes\FunctionTypeEnum.cs" />
     <Compile Include="SpecialTypes\NInt.cs" />
     <Compile Include="SpecialTypes\NDouble.cs" />
     <Compile Include="SpecialTypes\IntTriplet.cs" />

@@ -41,6 +41,11 @@ namespace FdsCodeLib
                         newFdsCmd = new FdsCmdCsvf(originalLines, startLineNum, endLineNum, commandNum);
                         break;
                     }
+                case FdsCmdType.CTRL:
+                    {
+                        newFdsCmd = new FdsCmdCtrl(originalLines, startLineNum, endLineNum, commandNum);
+                        break;
+                    }
                 case FdsCmdType.HEAD:
                     {
                         newFdsCmd = new FdsCmdHead(originalLines, startLineNum, endLineNum, commandNum);
@@ -56,7 +61,6 @@ namespace FdsCodeLib
                         newFdsCmd = new FdsCmdMesh(originalLines, startLineNum, endLineNum, commandNum);
                         break;
                     }
-
             }
 
             return newFdsCmd;
