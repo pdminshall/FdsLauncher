@@ -117,7 +117,12 @@ namespace FdsCodeLib
                 return newVal;
             }
 
-            // TODO: String List (CSV)
+            // List<string> property
+            if (objType == typeof(List<string>))
+            {
+                return GetStringListPar(commandString, parameterName, (List<string>)property);
+            }
+
             return null;
         }
 
@@ -327,6 +332,78 @@ namespace FdsCodeLib
             return defaultVal;
         }
 
-        // TODO: String List (CSV)
+        /// <summary>
+        /// Get string list parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static List<string> GetStringListPar(string commandString, string parameterName, List<string> defaultVal)
+        {
+
+            List<string> retVal = defaultVal;
+
+            Regex filter = new Regex(parameterName + @" *= *('.*)");
+
+            Match match = filter.Match(commandString);
+            if (match.Success)
+            {
+
+                // Need to move through string and parse all quoted values.
+                // Make sure that next parameter is detected to end parsing.
+
+                string line = match.Groups[1].Value;
+
+                // State machine with states: INSIDE_QUOTE, BEFORE_COMMA, AFTER_COMMA
+                string state = "AFTER_COMMA";
+                string value = "";
+                retVal = new List<string>();
+                for (int cnt = 0; cnt < line.Length; cnt++)
+                {
+                    string singChar = line.Substring(cnt, 1);
+
+                    // After comma, look for new value or end of list
+                    if (state == "AFTER_COMMA")
+                    {
+                        // If space after commad, carry on
+                        if (singChar == " ") { continue; }
+
+                        // If quote after comma, start new value
+                        if (singChar == "'")
+                        {
+                            state = "INSIDE_QUOTE";
+                            value = "";
+                            continue;
+                        }
+                    }
+
+                    // Inside quotes, record value and look for end of quote
+                    if (state == "INSIDE_QUOTE")
+                    {
+                        if (singChar == "'")
+                        {
+                            state = "BEFORE_COMMA";
+                            retVal.Add(value);
+                            continue;
+                        }
+
+                        value += singChar;
+                        continue;
+                    }
+
+                    // Before comma, look for comma
+                    if (state == "BEFORE_COMMA")
+                    {
+                        if (singChar == ",")
+                        {
+                            state = "AFTER_COMMA";
+                        }
+                    }
+                }
+            }
+
+            return retVal;
+        }
     }
 }

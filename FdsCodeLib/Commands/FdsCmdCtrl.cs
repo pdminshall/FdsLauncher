@@ -46,8 +46,7 @@ namespace FdsCodeLib
         /// <summary>
         /// CTRL INPUT_ID
         /// </summary>
-        // TODO: Need to use comma separate string array.
-        public Dictionary<string, string> INPUT_ID = new Dictionary<string, string>();
+        public List<string> INPUT_ID = new List<string>();
 
         /// <summary>
         /// CTRL INTEGRAL_GAIN
