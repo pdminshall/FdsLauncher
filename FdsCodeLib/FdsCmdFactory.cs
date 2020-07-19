@@ -46,6 +46,11 @@ namespace FdsCodeLib
                         newFdsCmd = new FdsCmdCtrl(originalLines, startLineNum, endLineNum, commandNum);
                         break;
                     }
+                case FdsCmdType.DEVC:
+                    {
+                        newFdsCmd = new FdsCmdDevc(originalLines, startLineNum, endLineNum, commandNum);
+                        break;
+                    }
                 case FdsCmdType.HEAD:
                     {
                         newFdsCmd = new FdsCmdHead(originalLines, startLineNum, endLineNum, commandNum);

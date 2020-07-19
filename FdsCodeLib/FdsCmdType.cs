@@ -30,7 +30,11 @@
         /// </summary>
         CTRL,
 
+        /// <summary>
+        /// Device parameters.
+        /// </summary>
         DEVC,
+
         DUMP,
 
         /// <summary>

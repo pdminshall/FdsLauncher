@@ -84,6 +84,12 @@ namespace FdsCodeLib
                 return GetRealTripletPar(commandString, parameterName, (RealTriplet)property);
             }
 
+            // RealDoublet property
+            if (objType == typeof(RealDoublet))
+            {
+                return GetRealDoubletPar(commandString, parameterName, (RealDoublet)property);
+            }
+
             // RealSextuplet property
             if (objType == typeof(RealSextuplet))
             {
@@ -262,6 +268,33 @@ namespace FdsCodeLib
                     double.TryParse(match.Groups[3].Value, out tmpZ))
                 {
                     return new RealTriplet(tmpX, tmpY, tmpZ);
+                }
+            }
+
+            return defaultVal;
+        }
+
+        /// <summary>
+        /// Get RealDoublet parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static RealDoublet GetRealDoubletPar(string commandString, string parameterName, RealDoublet defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
+            Match match = filter.Match(commandString);
+
+            if (match.Success)
+            {
+                double tmp1;
+                double tmp2;
+
+                if (double.TryParse(match.Groups[1].Value, out tmp1) &&
+                    double.TryParse(match.Groups[2].Value, out tmp2))
+                {
+                    return new RealDoublet(tmp1, tmp2);
                 }
             }
 

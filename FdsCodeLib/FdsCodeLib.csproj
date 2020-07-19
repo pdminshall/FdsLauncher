@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\FdsCmdDevc.cs" />
     <Compile Include="Commands\FdsCmdCtrl.cs" />
     <Compile Include="Commands\FdsCmdCsvf.cs" />
     <Compile Include="Commands\FdsCmdClip.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="SpecialTypes\NDouble.cs" />
     <Compile Include="SpecialTypes\IntTriplet.cs" />
     <Compile Include="SpecialTypes\RealSextuplet.cs" />
+    <Compile Include="SpecialTypes\RealDoublet.cs" />
     <Compile Include="SpecialTypes\RealTriplet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
