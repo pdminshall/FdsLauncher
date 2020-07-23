@@ -56,6 +56,11 @@ namespace FdsCodeLib
         public string ErrorMessage { get; set; } = "";
 
         /// <summary>
+        /// Reference to parent file object.
+        /// </summary>
+        public FdsFile FileReference { get; private set; }
+
+        /// <summary>
         /// Show command with line numbers.
         /// </summary>
         public string DebugOutput
@@ -65,7 +70,7 @@ namespace FdsCodeLib
                 string output = "";
                 if (StartLineNum == EndLineNum)
                 {
-                    output += "---- Line " + StartLineNum + "----\n";
+                    output += "---- Line " + StartLineNum + " ----\n";
 
                 }
                 else
@@ -106,12 +111,14 @@ namespace FdsCodeLib
         /// <param name="startLineNum">Start line number of command.</param>
         /// <param name="endLineNum">End line number of command.</param>
         /// <param name="commandNum">Sequential number of command.</param>
-        public FdsCmd(List<string> originalLines, int startLineNum, int endLineNum, int commandNum)
+        /// <param name="fileReference">Reference to parent file object.</param>
+        public FdsCmd(List<string> originalLines, int startLineNum, int endLineNum, int commandNum, FdsFile fileReference)
         {
             OriginalLines = originalLines;
             StartLineNum = startLineNum;
             EndLineNum = endLineNum;
             CommandNum = commandNum;
+            FileReference = fileReference;
 
             ParseCommand();
             LoadData();

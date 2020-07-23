@@ -45,8 +45,9 @@ namespace FdsCodeLib
         /// <param name="startLineNum">Start line number of command.</param>
         /// <param name="endLineNum">End line number of command.</param>
         /// <param name="commandNum">Sequential number of command.</param>
-        public FdsCmdBndf(List<string> originalLines, int startLineNum, int endLineNum, int commandNum) :
-               base(originalLines, startLineNum, endLineNum, commandNum)
+        /// <param name="fileReference">Reference to parent file object.</param>
+        public FdsCmdBndf(List<string> originalLines, int startLineNum, int endLineNum, int commandNum, FdsFile fileReference) :
+               base(originalLines, startLineNum, endLineNum, commandNum, fileReference)
         { }
     }
 }

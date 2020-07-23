@@ -172,7 +172,7 @@ namespace FdsCodeLib
                         myLine
                     };
                     commandNum++;
-                    FdsCmd fdsCmd = FdsCmdFactory.Create(originalLines, startNum, endNum, commandNum);
+                    FdsCmd fdsCmd = FdsCmdFactory.Create(originalLines, startNum, endNum, commandNum, this);
                     Commands.Add(fdsCmd);
                     continue;
                 }
@@ -203,7 +203,7 @@ namespace FdsCodeLib
                     endNum = lineNum;
                     commandNum++;
                     state = "";
-                    FdsCmd fdsCmd = FdsCmdFactory.Create(originalLines, startNum, endNum, commandNum);
+                    FdsCmd fdsCmd = FdsCmdFactory.Create(originalLines, startNum, endNum, commandNum, this);
                     Commands.Add(fdsCmd);
                 }
 

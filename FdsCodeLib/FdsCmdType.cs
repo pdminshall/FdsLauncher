@@ -35,6 +35,9 @@
         /// </summary>
         DEVC,
 
+        /// <summary>
+        /// Dump command.
+        /// </summary>
         DUMP,
 
         /// <summary>

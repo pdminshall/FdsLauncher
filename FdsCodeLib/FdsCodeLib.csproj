@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\FdsCmdDump.cs" />
     <Compile Include="Commands\FdsCmdDevc.cs" />
     <Compile Include="Commands\FdsCmdCtrl.cs" />
     <Compile Include="Commands\FdsCmdCsvf.cs" />
@@ -62,6 +63,8 @@
     <Compile Include="SpecialTypes\NInt.cs" />
     <Compile Include="SpecialTypes\NDouble.cs" />
     <Compile Include="SpecialTypes\IntTriplet.cs" />
+    <Compile Include="SpecialTypes\StringQuintet.cs" />
+    <Compile Include="SpecialTypes\StringDoublet.cs" />
     <Compile Include="SpecialTypes\RealSextuplet.cs" />
     <Compile Include="SpecialTypes\RealDoublet.cs" />
     <Compile Include="SpecialTypes\RealTriplet.cs" />

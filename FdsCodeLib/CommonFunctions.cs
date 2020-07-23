@@ -108,6 +108,12 @@ namespace FdsCodeLib
                 return GetStringDictPar(commandString, parameterName, (Dictionary<string, string>)property);
             }
 
+            // Dictionary<string, int> property
+            if (objType == typeof(Dictionary<string, int>))
+            {
+                return GetIntDictPar(commandString, parameterName, (Dictionary<string, int>)property);
+            }
+
             // Function type enum
             if (objType == typeof(FunctionTypeEnum))
             {
@@ -127,6 +133,18 @@ namespace FdsCodeLib
             if (objType == typeof(List<string>))
             {
                 return GetStringListPar(commandString, parameterName, (List<string>)property);
+            }
+
+            // StringDoublet property
+            if (objType == typeof(StringDoublet))
+            {
+                return GetStringDoubletPar(commandString, parameterName, (StringDoublet)property);
+            }
+
+            // StringQuintet property
+            if (objType == typeof(StringQuintet))
+            {
+                return GetStringQuintetPar(commandString, parameterName, (StringQuintet)property);
             }
 
             return null;
@@ -170,6 +188,34 @@ namespace FdsCodeLib
                 string key = match.Groups[1].Value;
                 string value = match.Groups[2].Value;
                 if (!retVal.ContainsKey(key)) { retVal.Add(key, value); }
+                match = match.NextMatch();
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Get int dictionary parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static Dictionary<string, int> GetIntDictPar(string commandString, string parameterName, Dictionary<string, int> defaultVal)
+        {
+            Regex filter = new Regex(parameterName + @" *\( *([^\)]+) *\) *= *([0-9]*)");
+
+            Match match = filter.Match(commandString);
+            Dictionary<string, int> retVal = new Dictionary<string, int>();
+            while (match.Success)
+            {
+                string key = match.Groups[1].Value;
+                string strVal = match.Groups[2].Value;
+                int value = 0;
+                if (Int32.TryParse(strVal, out value))
+                {
+                    if (!retVal.ContainsKey(key)) { retVal.Add(key, value); }
+                }
                 match = match.NextMatch();
             }
 
@@ -438,5 +484,53 @@ namespace FdsCodeLib
 
             return retVal;
         }
+
+        /// <summary>
+        /// Get string doublet.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static StringDoublet GetStringDoubletPar(string commandString, string parameterName, StringDoublet defaultVal)
+        {
+            // Set return value to default
+            List<string> returnVal = new List<string> { defaultVal.V1, defaultVal.V2 };
+
+            // Use existing function to get string list
+            List<string> stringList = GetStringListPar(commandString, parameterName, returnVal);
+
+            // Apply new values
+            if (stringList.Count > 0) { returnVal[0] = stringList[0]; }
+            if (stringList.Count > 1) { returnVal[1] = stringList[1]; }
+
+            return new StringDoublet(returnVal[0], returnVal[1]);
+        }
+
+        /// <summary>
+        /// Get string quintet.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static StringQuintet GetStringQuintetPar(string commandString, string parameterName, StringQuintet defaultVal)
+        {
+            // Set return value to default
+            List<string> returnVal = new List<string> { defaultVal.V1, defaultVal.V2, defaultVal.V3, defaultVal.V4, defaultVal.V5 };
+
+            // Use existing function to get string list
+            List<string> stringList = GetStringListPar(commandString, parameterName, returnVal);
+
+            // Apply new values
+            if (stringList.Count > 0) { returnVal[0] = stringList[0]; }
+            if (stringList.Count > 1) { returnVal[1] = stringList[1]; } 
+            if (stringList.Count > 2) { returnVal[2] = stringList[2]; } 
+            if (stringList.Count > 3) { returnVal[3] = stringList[3]; } 
+            if (stringList.Count > 4) { returnVal[4] = stringList[4]; } 
+
+            return new StringQuintet(returnVal[0], returnVal[1], returnVal[2], returnVal[3], returnVal[4]);
+        }
+
     }
 }
