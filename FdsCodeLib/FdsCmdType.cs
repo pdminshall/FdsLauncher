@@ -74,6 +74,10 @@
         SPEC,
         SURF,
         TABL,
+
+        /// <summary>
+        /// Time parameter.
+        /// </summary>
         TIME,
         TRNX,
         TRNY,

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FdsCodeLib
 {
@@ -183,11 +184,41 @@ namespace FdsCodeLib
         /// </summary>
         public string STATISTICS = "";
 
+        // Private field to back up property;
+        private double? pSTATISTICS_START = null;
         /// <summary>
         /// Statistics start (s).
         /// </summary>
-        // TODO: Default set to T_BEGIN;
-        public double STATISTICS_START = 0;
+        public double STATISTICS_START
+        {
+            get
+            {
+                // If parameter explicitly set, return the value
+                if (pSTATISTICS_START.HasValue)
+                {
+                    return pSTATISTICS_START.Value;
+                }
+                // If parameter not set, return T_BEGIN from TIME object
+                else
+                {
+                    // Get file object
+                    if (FileReference != null)
+                    {
+                        FdsCmdTime timeCmd = (FdsCmdTime)FileReference.Commands.Where(c => c.CommandType == FdsCmdType.TIME).FirstOrDefault();
+                        if (timeCmd != null)
+                        {
+                            return timeCmd.T_BEGIN;
+                        }
+                    }
+                    return 0;
+                }
+            }
+            // Set parameter
+            set
+            {
+                pSTATISTICS_START = value;
+            }
+        }
 
         /// <summary>
         /// Smoothing factor.
@@ -247,7 +278,7 @@ namespace FdsCodeLib
         {
             get
             {
-                if (pX_ID == null || pX_ID == "") { return (ID ?? "") + "-x"; }
+                if (pX_ID == "" && ID != "") { return ID + "-x"; }
                 else { return pX_ID; }
             }
             set
@@ -264,7 +295,7 @@ namespace FdsCodeLib
         {
             get
             {
-                if (pY_ID == null || pY_ID == "") { return (ID ?? "") + "-y"; }
+                if (pY_ID == "" && ID != "") { return ID + "-y"; }
                 else { return pY_ID; }
             }
             set
@@ -281,7 +312,7 @@ namespace FdsCodeLib
         {
             get
             {
-                if (pZ_ID == null || pZ_ID == "") { return (ID ?? "") + "-z"; }
+                if (pZ_ID == "" && ID != "") { return ID + "-z"; }
                 else { return pZ_ID; }
             }
             set

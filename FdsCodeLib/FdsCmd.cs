@@ -167,6 +167,16 @@ namespace FdsCodeLib
         /// </summary>
         public void LoadData()
         {
+            // Loop over each uppercase property and set dynamically
+            foreach (PropertyInfo pi in this.GetType().GetProperties(BindingFlags.Public|BindingFlags.DeclaredOnly|BindingFlags.Instance))
+            {
+                string fieldName = pi.Name;
+                if (fieldName.ToUpper() != fieldName) { continue; }
+                dynamic oldVal = pi.GetValue(this);
+                dynamic newVal = CommonFunctions.GetValue(CommandLine, fieldName, oldVal);
+                pi.SetValue(this, newVal);
+            }
+
             // Loop over each field and set dynamically
             foreach (FieldInfo fi in this.GetType().GetFields())
             {

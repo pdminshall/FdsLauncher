@@ -51,6 +51,7 @@
     <Compile Include="Commands\FdsCmdClip.cs" />
     <Compile Include="Commands\FdsCmdBndf.cs" />
     <Compile Include="Commands\FdsCmdMesh.cs" />
+    <Compile Include="Commands\FdsCmdTime.cs" />
     <Compile Include="Commands\FdsCmdMisc.cs" />
     <Compile Include="CommonFunctions.cs" />
     <Compile Include="Commands\FdsCmdHead.cs" />

@@ -47,6 +47,11 @@ namespace FdsCodeLib
         public FdsCmdMisc MiscSection { get; private set; }
 
         /// <summary>
+        /// Reference to TIME section.
+        /// </summary>
+        public FdsCmdTime TimeSection { get; private set; }
+
+        /// <summary>
         /// Constructor using file location.
         /// </summary>
         /// <param name="filePath">Path to FDS data file.</param>
@@ -122,6 +127,13 @@ namespace FdsCodeLib
             try
             {
                 MiscSection = (FdsCmdMisc)(Commands.Where(x => x.CommandType == FdsCmdType.MISC).FirstOrDefault());
+            }
+            catch (Exception) { }
+
+            // Get TIME section
+            try
+            {
+                TimeSection = (FdsCmdTime)(Commands.Where(x => x.CommandType == FdsCmdType.TIME).FirstOrDefault());
             }
             catch (Exception) { }
 

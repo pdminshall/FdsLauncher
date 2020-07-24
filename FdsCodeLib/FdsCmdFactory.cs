@@ -72,6 +72,11 @@ namespace FdsCodeLib
                         newFdsCmd = new FdsCmdMesh(originalLines, startLineNum, endLineNum, commandNum, fileReference);
                         break;
                     }
+                case FdsCmdType.TIME:
+                    {
+                        newFdsCmd = new FdsCmdTime(originalLines, startLineNum, endLineNum, commandNum, fileReference);
+                        break;
+                    }
             }
 
             return newFdsCmd;
