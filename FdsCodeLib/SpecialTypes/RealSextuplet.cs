@@ -6,34 +6,39 @@
     public struct RealSextuplet
     {
         /// <summary>
+        /// Flag to set if struct has set value.
+        /// </summary>
+        public readonly bool HasValue;
+
+        /// <summary>
         /// V1 value.
         /// </summary>
-        public double V1;
+        public readonly double V1;
 
         /// <summary>
         /// V2 value.
         /// </summary>
-        public double V2;
+        public readonly double V2;
 
         /// <summary>
         /// V3 value.
         /// </summary>
-        public double V3;
+        public readonly double V3;
 
         /// <summary>
         /// V4 value.
         /// </summary>
-        public double V4;
+        public readonly double V4;
 
         /// <summary>
         /// V5 value.
         /// </summary>
-        public double V5;
+        public readonly double V5;
 
         /// <summary>
         /// V6 value.
         /// </summary>
-        public double V6;
+        public readonly double V6;
 
         /// <summary>
         /// Constructor with parameters.
@@ -46,6 +51,7 @@
         /// <param name="v6">V6 value.</param>
         public RealSextuplet(double v1, double v2, double v3, double v4, double v5, double v6)
         {
+            HasValue = true;
             V1 = v1;
             V2 = v2;
             V3 = v3;

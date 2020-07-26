@@ -11,20 +11,26 @@ namespace FdsCodeLib
     /// </summary>
     public struct RealTriplet
     {
+
+        /// <summary>
+        /// Flag to set if struct has set values.
+        /// </summary>
+        public readonly bool HasValue;
+
         /// <summary>
         /// V1 value.
         /// </summary>
-        public double V1;
+        public readonly double V1;
 
         /// <summary>
         /// V2 value.
         /// </summary>
-        public double V2;
+        public readonly double V2;
 
         /// <summary>
         /// V3 value.
         /// </summary>
-        public double V3;
+        public readonly double V3;
 
         /// <summary>
         /// Constructor with parameters.
@@ -34,6 +40,7 @@ namespace FdsCodeLib
         /// <param name="v3">V3 value.</param>
         public RealTriplet(double v1, double v2, double v3)
         {
+            HasValue = true;
             V1 = v1;
             V2 = v2;
             V3 = v3;
