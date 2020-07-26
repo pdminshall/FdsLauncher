@@ -62,6 +62,11 @@ namespace FdsCodeLib
                         newFdsCmd = new FdsCmdHead(originalLines, startLineNum, endLineNum, commandNum, fileReference);
                         break;
                     }
+                case FdsCmdType.HOLE:
+                    {
+                        newFdsCmd = new FdsCmdHole(originalLines, startLineNum, endLineNum, commandNum, fileReference);
+                        break;
+                    }
                 case FdsCmdType.MISC:
                     {
                         newFdsCmd = new FdsCmdMisc(originalLines, startLineNum, endLineNum, commandNum, fileReference);

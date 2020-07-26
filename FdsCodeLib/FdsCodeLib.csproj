@@ -50,6 +50,7 @@
     <Compile Include="Commands\FdsCmdCsvf.cs" />
     <Compile Include="Commands\FdsCmdClip.cs" />
     <Compile Include="Commands\FdsCmdBndf.cs" />
+    <Compile Include="Commands\FdsCmdHole.cs" />
     <Compile Include="Commands\FdsCmdMesh.cs" />
     <Compile Include="Commands\FdsCmdTime.cs" />
     <Compile Include="Commands\FdsCmdMisc.cs" />

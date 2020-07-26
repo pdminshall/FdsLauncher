@@ -45,7 +45,11 @@
         /// </summary>
         HEAD,
 
+        /// <summary>
+        /// Hole object.
+        /// </summary>
         HOLE,
+
         HVAC,
         INIT,
         ISOF,

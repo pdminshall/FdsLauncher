@@ -296,7 +296,10 @@ namespace FdsCodeLib
         /// </summary>
         public bool SUPPRESS_DIAGNOSTICS = false;
 
-        // TODO: UVW_TIMER - Real Vector(10)
+        /// <summary>
+        /// UVW_TIMER
+        /// </summary>
+        public Dictionary<string, int> UVW_TIMER = new Dictionary<string, int>();
 
         /// <summary>
         /// VELOCITY_ERROR_FILE
