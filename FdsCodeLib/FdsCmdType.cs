@@ -52,7 +52,12 @@
 
         HVAC,
         INIT,
+
+        /// <summary>
+        /// Isosurface parameters.
+        /// </summary>
         ISOF,
+
         MATL,
 
         /// <summary>

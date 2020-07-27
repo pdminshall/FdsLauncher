@@ -114,6 +114,12 @@ namespace FdsCodeLib
                 return GetIntDictPar(commandString, parameterName, (Dictionary<string, int>)property);
             }
 
+            // Dictionary<string, double> property
+            if (objType == typeof(Dictionary<string, double>))
+            {
+                return GetRealDictPar(commandString, parameterName, (Dictionary<string, double>)property);
+            }
+
             // Function type enum
             if (objType == typeof(FunctionTypeEnum))
             {
@@ -159,6 +165,8 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static string GetStringPar(string commandString, string parameterName, string defaultVal)
         {
+            // "PARNAME = 'stuff'"
+            // ParName = "stuff";
             Regex filter = new Regex(parameterName + @" *= *'([^']*)'");
             Match match = filter.Match(commandString);
 
@@ -179,6 +187,8 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static Dictionary<string, string> GetStringDictPar(string commandString, string parameterName, Dictionary<string, string> defaultVal)
         {
+            // "PARNAME(1) = 'stuff'"
+            // ParName["1"] = "stuff";
             Regex filter = new Regex(parameterName + @" *\( *([^\)]+) *\) *= *'([^']*)'");
 
             Match match = filter.Match(commandString);
@@ -203,7 +213,9 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static Dictionary<string, int> GetIntDictPar(string commandString, string parameterName, Dictionary<string, int> defaultVal)
         {
-            Regex filter = new Regex(parameterName + @" *\( *([^\)]+) *\) *= *([0-9]*)");
+            // "PARNAME(1) = 23"
+            // ParName["1"] = 23;
+            Regex filter = new Regex(parameterName + @" *\( *([^\)]+) *\) *= *(-?[0-9]+)");
 
             Match match = filter.Match(commandString);
             Dictionary<string, int> retVal = new Dictionary<string, int>();
@@ -223,6 +235,36 @@ namespace FdsCodeLib
         }
 
         /// <summary>
+        /// Get real dictionary parameter value.
+        /// </summary>
+        /// <param name="commandString">Full command string.</param>
+        /// <param name="parameterName">Name of parameter to fetch.</param>
+        /// <param name="defaultVal">Default value if not found.</param>
+        /// <returns>Value of parameter.</returns>
+        public static Dictionary<string, double> GetRealDictPar(string commandString, string parameterName, Dictionary<string, double> defaultVal)
+        {
+            // "PARNAME(1) = 23.0"
+            // ParName["1"] = 23.0;
+            Regex filter = new Regex(parameterName + @" *\( *([^\)]+) *\) *= *(-?[0-9]+\.[0-9]*)");
+
+            Match match = filter.Match(commandString);
+            Dictionary<string, double> retVal = new Dictionary<string, double>();
+            while (match.Success)
+            {
+                string key = match.Groups[1].Value;
+                string strVal = match.Groups[2].Value;
+                double value = 0;
+                if (Double.TryParse(strVal, out value))
+                {
+                    if (!retVal.ContainsKey(key)) { retVal.Add(key, value); }
+                }
+                match = match.NextMatch();
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Get boolean parameter value.
         /// </summary>
         /// <param name="commandString">Full command string.</param>
@@ -231,6 +273,8 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static bool GetBoolPar(string commandString, string parameterName, bool defaultVal)
         {
+            // "PARNAME = .TRUE."
+            // ParName = true;
             Regex filter = new Regex(parameterName + @" *= *\.([^\.]*)\.");
             Match match = filter.Match(commandString);
 
@@ -252,6 +296,8 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static double GetDoublePar(string commandString, string parameterName, double defaultVal)
         {
+            // "PARNAME = 23.0"
+            // ParName = 23.0;
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*)");
             Match match = filter.Match(commandString);
 
@@ -276,6 +322,8 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static int GetIntPar(string commandString, string parameterName, int defaultVal)
         {
+            // "PARNAME = 23"
+            // ParName = 23;
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?)");
             Match match = filter.Match(commandString);
 
@@ -300,6 +348,10 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static RealTriplet GetRealTripletPar(string commandString, string parameterName, RealTriplet defaultVal)
         {
+            // "PARNAME = 23.0, 24.0, 25.0"
+            // ParName.V1 = 23.0;
+            // ParName.V2 = 24.0;
+            // ParName.V3 = 25.0;
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
             Match match = filter.Match(commandString);
 
@@ -329,6 +381,9 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static RealDoublet GetRealDoubletPar(string commandString, string parameterName, RealDoublet defaultVal)
         {
+            // "PARNAME = 23., 24.0"
+            // ParName.X = 23.0;
+            // ParName.Y = 24.0;
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
             Match match = filter.Match(commandString);
 
@@ -356,6 +411,13 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static RealSextuplet GetRealSextupletPar(string commandString, string parameterName, RealSextuplet defaultVal)
         {
+            // "PARNAME = 23.0, 24.0, 25.0, 26.0, 27.0, 28.0"
+            // ParName.V1 = 23.0;
+            // ParName.V2 = 24.0;
+            // ParName.V3 = 25.0;
+            // ParName.V4 = 26.0;
+            // ParName.V5 = 27.0;
+            // ParName.V6 = 28.0;
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*) *, *(-?[0-9]+\.?[0-9]*)");
             Match match = filter.Match(commandString);
 
@@ -391,6 +453,10 @@ namespace FdsCodeLib
         /// <returns>Value of parameter.</returns>
         public static IntTriplet GetIntTripletPar(string commandString, string parameterName, IntTriplet defaultVal)
         {
+            // "PARNAME = 23, 24, 25"
+            // ParName.V1 = 23;
+            // ParName.V2 = 24;
+            // ParName.V3 = 25;
             Regex filter = new Regex(parameterName + @" *= *(-?[0-9]+) *, *(-?[0-9]+) *, *(-?[0-9]+)");
             Match match = filter.Match(commandString);
 
