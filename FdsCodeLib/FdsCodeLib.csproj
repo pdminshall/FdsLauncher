@@ -51,6 +51,7 @@
     <Compile Include="Commands\FdsCmdCsvf.cs" />
     <Compile Include="Commands\FdsCmdClip.cs" />
     <Compile Include="Commands\FdsCmdBndf.cs" />
+    <Compile Include="Commands\FdsCmdHvac.cs" />
     <Compile Include="Commands\FdsCmdIsof.cs" />
     <Compile Include="Commands\FdsCmdHole.cs" />
     <Compile Include="Commands\FdsCmdMesh.cs" />

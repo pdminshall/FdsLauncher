@@ -50,7 +50,11 @@
         /// </summary>
         HOLE,
 
+        /// <summary>
+        /// HVAC object.
+        /// </summary>
         HVAC,
+
         INIT,
 
         /// <summary>
