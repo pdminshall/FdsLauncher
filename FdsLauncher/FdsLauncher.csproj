@@ -63,8 +63,11 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,15 +77,16 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\FdsBgWorker.cs" />
     <Compile Include="GUI\FdsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\FdsForm.Designer.cs">
       <DependentUpon>FdsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\FdsBgWorker.cs" />
     <Compile Include="GUI\FdsFormCommands.cs">
       <SubType>Form</SubType>
     </Compile>
